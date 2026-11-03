@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Eight-Star Numerical Magnetic Field 八星数字磁场</title>
+<title>八星数字磁场 — 如何看吉凶星 | Eight-Star Numerical Magnetic Field</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -87,8 +87,11 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .z{font-weight:700;color:var(--mut);font-size:1em;margin-left:6px}.zl{display:block;margin-top:2px}.leg em{display:block;font:600 11px Inter;font-style:normal;opacity:.8}
 .cols{align-items:stretch}.cols .card{margin-bottom:0}.cols .ch2{margin:0}
 .cols .sh h3{font-family:Inter,"PingFang SC","Noto Sans SC",sans-serif;font-size:clamp(14px,4vw,19px);font-weight:700;line-height:1.25}
+.cols{row-gap:0}.cols .ch2{margin-bottom:10px}.cols .card{margin-bottom:10px}
+@supports (grid-template-rows:subgrid){.cols .card.sc{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}}
+.en2{font-size:13px;font-weight:600;color:var(--mut);line-height:1.35;margin-top:2px}
 </style></head><body>
-<header><div class="hin"><div class="logo">数</div><div><h1>Eight-Star Numerical Magnetic Field <span class="z">八星数字磁场</span></h1><div class="hs">Four Auspicious &amp; Four Inauspicious Stars · 四吉星 四凶星<br><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
+<header><div class="hin"><div class="logo">数</div><div><h1>八星数字磁场 — 如何看吉凶星</h1><div class="en2">Eight-Star Numerical Magnetic Field<br>How to Read Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
 <script>
 const DE={1:'水',6:'水',2:'火',7:'火',3:'木',8:'木',4:'金',9:'金',5:'土',0:'土'},EC={水:'--W',火:'--F',木:'--M',金:'--J',土:'--T'};
@@ -98,7 +101,7 @@ const S=[
 {z:'六煞',py:'Liu Sha',en:'Six Killings',el:'水',r:-2,col:'#dd7a3a',rc:'booo',p:['16/61','47/74','38/83','29/92']},
 {z:'祸害',py:'Huo Hai',en:'Mishap / Trouble',el:'土',r:-1,col:'#c98a1c',rc:'oooo',p:['17/71','89/98','46/64','23/32']},
 {z:'伏位',py:'Fu Wei',en:'Stability',el:'木',r:1,col:'#6fae9a',rc:'oyyy',p:['11/22','88/99','66/77','33/44']},
-{z:'生气',py:'Sheng Qi',en:'Generating Qi (Energy)',el:'木',r:2,col:'#4aa882',rc:'yoyo',p:['14/41','67/76','93/39','28/82']},
+{z:'生气',py:'Sheng Qi',en:'Generating Qi',el:'木',r:2,col:'#4aa882',rc:'yoyo',p:['14/41','67/76','93/39','28/82']},
 {z:'天医',py:'Tian Yi',en:'Heavenly Physician',el:'土',r:3,col:'#2f8f68',rc:'yyyo',p:['13/31','68/86','49/94','27/72']},
 {z:'延年',py:'Yan Nian',en:'Longevity',el:'金',r:4,col:'#1f7a55',rc:'yoyo',p:['19/91','78/87','34/43','26/62']}];
 const RC={y:'#e3b92a',o:'#e07a5f',b:'#5aa7d6'},M={};
@@ -126,7 +129,7 @@ const hid=ps.filter(r=>r.hid).length;
 document.getElementById('spw').innerHTML=`<h2>Star spectrum <span class="z">星曜光谱</span></h2><div class="sb">Weakest to strongest on each side. A badge shows how many pairs of your number land on that star${hid?` (plus ${hid} hidden 隐 pair${hid>1?'s':''})`:''}. Tap to explore.<span class="zl">每侧由弱到强。角标显示号码中落在该星的数字组数${hid?`（另有 ${hid} 组隐）`:''}。点击查看。</span></div>
 <div class="spec">${S.map(s=>`<button class="sp ${cnt[s.z]?'me':''}" style="--c:${s.col}" onclick="say('<b>${s.z}</b> ${s.en} · ${s.el} ${EN[s.el]}<br>${s.p.join(' · ')}')">${cnt[s.z]?`<span class="mk">${cnt[s.z]}</span>`:''}${s.z}<small>${s.r>0?'+'+s.r:s.r}</small></button>`).join('')}</div>
 <div class="axis"><span>◀ Most inauspicious 最凶</span><span>Most auspicious 最吉 ▶</span></div>`}
-function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.en} ${s.z}</h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">Element 五行：${EN[s.el]} ${s.el}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}')">${x}</button>`).join('')}</div></div>`)}
+function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<br>${s.en}</h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">Element 五行：${EN[s.el]} ${s.el}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}')">${x}</button>`).join('')}</div></div>`)}
 function tb(){
 v.innerHTML=`<div class="cols"><div class="ch2" style="background:#2f8f68">四吉星 Auspicious</div><div class="ch2" style="background:#c8503c">四凶星 Inauspicious</div>${(()=>{const A=col(true),B=col(false);return A.map((x,i)=>x+B[i]).join('')})()}</div><div class="note" style="color:var(--mut)">Strongest star first in each column.</div>`}
 const v=document.getElementById('v');nav();R();
