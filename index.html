@@ -85,6 +85,7 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .ch.ya,.ch.ra{border:0;color:var(--fg)}.ch.ya{background:rgba(234,179,8,.38)}.ch.ra{background:rgba(239,68,68,.17)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ch.ya{background:rgba(234,179,8,.42);color:#fff}:root:not([data-theme="light"]) .ch.ra{background:rgba(239,68,68,.34);color:#fff}}
 .z{font-weight:700;color:var(--mut);font-size:1em;margin-left:6px}.zl{display:block;margin-top:2px}.leg em{display:block;font:600 11px Inter;font-style:normal;opacity:.8}
+.cols{align-items:stretch}.cols .card{margin-bottom:0}.cols .ch2{margin:0}.cols .sb{min-height:2.9em}
 </style></head><body>
 <header><div class="hin"><div class="logo">数</div><div><h1>Eight-Star Numerical Magnetic Field <span class="z">八星数字磁场</span></h1><div class="hs">Four Auspicious &amp; Four Inauspicious Stars · 四吉星 四凶星<br><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
@@ -124,9 +125,9 @@ const hid=ps.filter(r=>r.hid).length;
 document.getElementById('spw').innerHTML=`<h2>Star spectrum <span class="z">星曜光谱</span></h2><div class="sb">Weakest to strongest on each side. A badge shows how many pairs of your number land on that star${hid?` (plus ${hid} hidden 隐 pair${hid>1?'s':''})`:''}. Tap to explore.<span class="zl">每侧由弱到强。角标显示号码中落在该星的数字组数${hid?`（另有 ${hid} 组隐）`:''}。点击查看。</span></div>
 <div class="spec">${S.map(s=>`<button class="sp ${cnt[s.z]?'me':''}" style="--c:${s.col}" onclick="say('<b>${s.z}</b> ${s.py} · ${s.en} · ${s.el} ${EN[s.el]}<br>${s.p.join(' · ')}')">${cnt[s.z]?`<span class="mk">${cnt[s.z]}</span>`:''}${s.z}<small>${s.r>0?'+'+s.r:s.r}</small></button>`).join('')}</div>
 <div class="axis"><span>◀ Most inauspicious 最凶</span><span>Most auspicious 最吉 ▶</span></div>`}
-function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<small>${s.py}</small></h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">${s.en} · ${s.el} ${EN[s.el]}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}')">${x}</button>`).join('')}</div></div>`).join('')}
+function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<small>${s.py}</small></h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">${s.en} · ${s.el} ${EN[s.el]}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}')">${x}</button>`).join('')}</div></div>`)}
 function tb(){
-v.innerHTML=`<div class="cols"><div><div class="ch2" style="background:#2f8f68">四吉星 Auspicious</div>${col(true)}</div><div><div class="ch2" style="background:#c8503c">四凶星 Inauspicious</div>${col(false)}</div></div><div class="note" style="color:var(--mut)">Strongest star first in each column.</div>`}
+v.innerHTML=`<div class="cols"><div class="ch2" style="background:#2f8f68">四吉星 Auspicious</div><div class="ch2" style="background:#c8503c">四凶星 Inauspicious</div>${(()=>{const A=col(true),B=col(false);return A.map((x,i)=>x+B[i]).join('')})()}</div><div class="note" style="color:var(--mut)">Strongest star first in each column.</div>`}
 const v=document.getElementById('v');nav();R();
 function tick(){const d=new Date();document.getElementById('clk').textContent=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' ('+d.toLocaleDateString('zh-CN',{weekday:'short'})+') · '+d.toLocaleTimeString('en-GB')}
 tick();setInterval(tick,1000);
