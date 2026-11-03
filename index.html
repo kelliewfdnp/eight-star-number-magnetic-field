@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eight-Star Numerical Magnetic Field 八星数字磁场</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f8fafc;--fg:#1e293b;--mut:#64748b;--card:#fff;--line:#e2e8f0;--soft:#f1f5f9;--em:#2f8f68;--em2:#4aa882;--hd:#fff;
+--W:#cfe6f5;--F:#f6cdbf;--M:#cfe9d3;--J:#f6e08a;--T:#e2dcd2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--fg:#e2e8f0;--mut:#94a3b8;--card:#1e293b;--line:#334155;--soft:#273449;--hd:#1e293b;
+--W:#2b5873;--F:#7a3f31;--M:#2f6340;--J:#7a6a1c;--T:#5a534b}}
+:root[data-theme="dark"]{--bg:#0f172a;--fg:#e2e8f0;--mut:#94a3b8;--card:#1e293b;--line:#334155;--soft:#273449;--hd:#1e293b;--W:#2b5873;--F:#7a3f31;--M:#2f6340;--J:#7a6a1c;--T:#5a534b}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,-apple-system,"PingFang SC","Noto Sans SC",sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hd);z-index:30}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hd);border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.hin{max-width:760px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--em2),var(--em));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;box-shadow:0 4px 10px rgba(47,143,104,.3)}
+h1{font-size:18px;margin:0;font-weight:700;letter-spacing:-.2px}.hs{font-size:12px;color:var(--mut);font-weight:500}
+nav{max-width:760px;margin:0 auto;padding:0 14px 10px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{border:1px solid var(--line);background:var(--soft);color:var(--mut);border-radius:11px;padding:8px 13px;font:600 13px Inter,sans-serif;white-space:nowrap}
+nav button.on{background:var(--card);color:var(--em);border-color:var(--em2);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+main{max-width:760px;margin:0 auto;padding:14px 14px 100px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.card h2{font-size:16px;margin:0 0 2px;font-weight:700}.card .sb{font-size:12.5px;color:var(--mut);margin-bottom:10px}
+.hero{background:linear-gradient(135deg,#2f8f68,#1f6f87);color:#fff;border:0;text-align:center;padding:18px 14px}
+.hero .bd{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;font-weight:600}
+.big{font-size:42px;font-weight:800;letter-spacing:3px;margin:4px 0 10px}
+.hero .pairs{justify-content:center}
+.pairs{display:flex;flex-wrap:wrap;gap:6px}
+.pc{border:0;border-radius:11px;padding:6px 10px;background:var(--c,#94a3b8);color:#fff;font:700 15px Inter,sans-serif;text-align:center;min-width:56px}
+.pc small{display:block;font:600 11px "PingFang SC","Noto Sans SC",sans-serif;opacity:.95}
+.pc.hid{background:rgba(148,163,184,.85)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.st b{display:block;font-size:22px;font-weight:800;line-height:1.1}.st span{font-size:11.5px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.spec{padding-top:14px;display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.sp{border:2px solid transparent;border-radius:11px;padding:8px 0;background:var(--c);color:#fff;font:700 15px "PingFang SC","Noto Sans SC",sans-serif;text-align:center;position:relative}
+.sp small{display:block;font:600 10.5px Inter;opacity:.95}.sp.me{border-color:var(--fg);box-shadow:0 0 0 2px var(--fg);transform:translateY(-3px)}
+.dot{position:absolute;top:-12px;left:50%;transform:translateX(-50%);min-width:23px;height:23px;border-radius:12px;background:var(--fg);color:var(--bg);font:800 12px Inter,sans-serif;font-style:normal;display:flex;align-items:center;justify-content:center;border:2px solid var(--card)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.ch2{font:700 14px Inter,sans-serif;margin:0 0 8px;padding:8px 10px;border-radius:11px;color:#fff;text-align:center}
+.two .sc{padding:10px}.two .sh{flex-direction:column;gap:4px}.two .sh h3{font-size:19px}.two .sh h3 small{display:block;margin:0;font-size:11px}
+.two .chips{display:grid;grid-template-columns:1fr 1fr;gap:5px}.two .ch{min-width:0;padding:7px 2px;font-size:14px;text-align:center}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:6px;font-weight:600}
+.row{display:flex;align-items:center;gap:10px;margin:10px 0}
+.nm{width:84px;flex:none;font:700 15px "PingFang SC","Noto Sans SC",sans-serif}.nm small{display:block;font:500 11px Inter;color:var(--mut)}
+.bar{flex:1;height:12px;background:var(--soft);border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c);border-radius:8px}
+.flt{display:flex;gap:6px;margin-bottom:12px}
+.flt button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:11px;padding:9px 6px;font:600 13px Inter,sans-serif}
+.flt button.on{background:var(--fg);color:var(--bg)}
+.sc{border-left:5px solid var(--c)}
+.sh{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.sh h3{margin:0;font:700 20px "PingFang SC","Noto Sans SC",sans-serif}.sh h3 small{font:500 12px Inter;color:var(--mut);margin-left:4px}
+.tag{font-size:11px;font-weight:700;color:#fff;background:var(--c);border-radius:20px;padding:3px 10px;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ch{border:1px solid var(--line);border-left:4px solid var(--rc,var(--line));background:var(--soft);color:var(--fg);border-radius:10px;padding:8px 11px;font:700 15px Inter,sans-serif;min-width:64px}
+.ch.sel{outline:3px solid var(--em2)}
+.ch.fav{background:var(--J)}
+.ladder{display:flex;align-items:center;gap:4px;margin-top:8px;flex-wrap:wrap}
+.ladder span{font-size:13px;color:var(--mut)}
+.ladder .ls{font:700 13px "PingFang SC",Inter;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);background:var(--c);border-radius:8px;padding:3px 8px}
+.gl{margin-bottom:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
+.gl .n{font-size:22px;font-weight:800;letter-spacing:2px}
+.note{font-size:13.5px;margin:7px 0}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--soft);border:1px solid var(--line);color:var(--mut)}
+.dg{display:flex;gap:5px;justify-content:center}
+.dg div{width:38px;text-align:center}.dg b{display:block;font-size:26px;font-weight:800}
+.dg i{display:block;width:32px;height:32px;line-height:32px;border-radius:50%;margin:2px auto 0;font:600 13px "PingFang SC",Inter;font-style:normal;background:var(--e)}
+input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:var(--soft);color:var(--fg);margin:4px 0 10px}
+.leg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.leg div{background:var(--e);border-radius:14px;padding:10px 0;text-align:center;font:700 18px "PingFang SC",Inter}.leg span{display:block;font:700 13px Inter;margin-top:3px}
+.pin{font:800 22px Inter;letter-spacing:3px}
+.go{border:0;background:var(--em);color:#fff;border-radius:10px;padding:6px 12px;font:600 12px Inter,sans-serif;margin-left:8px}
+#info{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:736px;margin:0 auto;background:var(--fg);color:var(--bg);border-radius:14px;padding:12px 15px;font-size:14px;display:none;z-index:40;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.sp{position:relative;overflow:visible}.sp.me{border:3px solid var(--fg);transform:translateY(-4px);box-shadow:0 6px 14px rgba(0,0,0,.28)}.sp.me::after{content:none}
+.mk{position:absolute;top:-13px;right:-8px;width:26px;height:26px;border-radius:50%;background:var(--fg);color:var(--bg);font:800 13px Inter,sans-serif;line-height:1;display:flex;align-items:center;justify-content:center;border:2px solid var(--card);padding:0}
+.spec{margin-top:16px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.ch2{font:800 14px "PingFang SC","Noto Sans SC",Inter,sans-serif;margin:0 0 8px;text-align:center;padding:8px 4px;border-radius:12px;color:#fff}
+.cols .card{padding:10px;margin-bottom:10px}.cols .sh h3{font-size:19px}.cols .sh h3 small{display:block;margin:0;font-size:11px}
+.cols .tag{font-size:10.5px;padding:2px 7px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.g2 .ch{min-width:0;padding:7px 4px;font-size:14px;text-align:center}
+.ch.ya,.ch.ra{border:0;color:var(--fg)}.ch.ya{background:rgba(234,179,8,.38)}.ch.ra{background:rgba(239,68,68,.17)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ch.ya{background:rgba(234,179,8,.42);color:#fff}:root:not([data-theme="light"]) .ch.ra{background:rgba(239,68,68,.34);color:#fff}}
+.z{font-weight:500;color:var(--mut);font-size:.82em;margin-left:6px}.zl{display:block;margin-top:2px}.leg em{display:block;font:600 11px Inter;font-style:normal;opacity:.8}
+</style></head><body>
+<header><div class="hin"><div class="logo">数</div><div><h1>Eight-Star Numerical Magnetic Field <span class="z">八星数字磁场</span></h1><div class="hs">Four Auspicious &amp; Four Inauspicious Stars · 四吉星 四凶星<br><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
+<main id="v"></main><div id="info"></div>
+<script>
+const DE={1:'水',6:'水',2:'火',7:'火',3:'木',8:'木',4:'金',9:'金',5:'土',0:'土'},EC={水:'--W',火:'--F',木:'--M',金:'--J',土:'--T'};
+const S=[
+{z:'绝命',py:'Jue Ming',en:'Life Threatening',el:'金',r:-4,col:'#9b2c2c',rc:'oooo',p:['12/21','69/96','48/84','37/73']},
+{z:'五鬼',py:'Wu Gui',en:'Five Evils',el:'火',r:-3,col:'#c8503c',rc:'oooo',p:['18/81','97/79','36/63','42/24']},
+{z:'六煞',py:'Liu Sha',en:'Six Killings',el:'水',r:-2,col:'#dd7a3a',rc:'booo',p:['16/61','47/74','38/83','29/92']},
+{z:'祸害',py:'Huo Hai',en:'Mishap / Trouble',el:'土',r:-1,col:'#c98a1c',rc:'oooo',p:['17/71','89/98','46/64','23/32']},
+{z:'伏位',py:'Fu Wei',en:'Stability',el:'木',r:1,col:'#6fae9a',rc:'oyyy',p:['11/22','88/99','66/77','33/44']},
+{z:'生气',py:'Sheng Qi',en:'Generating Qi (Energy / Force)',el:'木',r:2,col:'#4aa882',rc:'yoyo',p:['14/41','67/76','93/39','28/82']},
+{z:'天医',py:'Tian Yi',en:'Heavenly Physician',el:'土',r:3,col:'#2f8f68',rc:'yyyo',p:['13/31','68/86','49/94','27/72']},
+{z:'延年',py:'Yan Nian',en:'Longevity',el:'金',r:4,col:'#1f7a55',rc:'yoyo',p:['19/91','78/87','34/43','26/62']}];
+const RC={y:'#e3b92a',o:'#e07a5f',b:'#5aa7d6'},M={};
+S.forEach(s=>s.p.forEach(x=>x.split('/').forEach(k=>M[k]=s)));
+function pr(p){if(/[05]/.test(p))return{z:'隐',en:'Hidden 隐 · 太极点 (contains 0 or 5 · 含0或5)',col:'#94a3b8',hid:1};const s=M[p];return{z:s.z,en:s.en+' · '+s.el,col:s.col,s}}
+const pairs=n=>{const a=[];for(let i=0;i<n.length-1;i++)a.push(n.slice(i,i+2));return a};
+const info=document.getElementById('info');let tm;
+function say(t){info.innerHTML=t;info.style.display='block';clearTimeout(tm);tm=setTimeout(()=>info.style.display='none',6000)}
+const pc=p=>{const r=pr(p);return `<button class="pc ${r.hid?'hid':''}" style="--c:${r.col}" onclick="say('<b>${p}</b> → ${r.z} · ${r.en}')">${p}<small>${r.z}</small></button>`};
+let QV='';
+const EN={水:'Water',火:'Fire',木:'Wood',金:'Metal',土:'Earth'};
+const tabs=['Number Lab 号码分析','Star Tables 星表'];let cur=0;
+function nav(){document.getElementById('nav').innerHTML=tabs.map((t,i)=>`<button class="${i==cur?'on':''}" onclick="cur=${i};nav();R()">${i+1}. ${t}</button>`).join('')}
+function R(){info.style.display='none';[lab,tb][cur]();scrollTo(0,0)}
+function lab(){
+v.innerHTML=`<div class="card"><h2>Key in any number <span class="z">输入任意号码</span></h2><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div><input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)"><div class="pairs" id="o"></div></div>
+<div class="card"><h2>Digit elements <span class="z">数字五行</span></h2><div class="sb">Tap an element to see its digits.<span class="zl">点击五行，查看对应数字。</span></div><div class="leg">${[['水','1 · 6'],['火','2 · 7'],['木','3 · 8'],['金','4 · 9'],['土','5 · 0']].map(([e,d])=>`<div style="--e:var(${EC[e]})" onclick="say('${e} ${EN[e]}: digits 数字 ${d}')">${e}<em>${EN[e]}</em><span>${d}</span></div>`).join('')}</div></div>
+<div class="card" id="spw"></div>
+<div class="card"><h2>The ladder <span class="z">星曜强弱</span></h2><div class="sb" style="margin:0">Order of strength within the stars 星的强弱顺序：<br><b>Auspicious / 吉星:</b> 伏位 &lt; 生气 &lt; 天医 &lt; 延年<br><b>Inauspicious / 凶星:</b> 祸害 &lt; 六煞 &lt; 五鬼 &lt; 绝命</div></div>`;
+an(QV)}
+function an(x){x=x.replace(/\D/g,'');QV=x;document.getElementById('o').innerHTML=x.length>1?pairs(x).map(pc).join(''):'';spec()}
+function spec(){
+const ps=QV.length>1?pairs(QV).map(pr):[],cnt={};ps.forEach(r=>{if(r.s)cnt[r.s.z]=(cnt[r.s.z]||0)+1});
+const hid=ps.filter(r=>r.hid).length;
+document.getElementById('spw').innerHTML=`<h2>Star spectrum <span class="z">星曜光谱</span></h2><div class="sb">Weakest to strongest on each side. A badge shows how many pairs of your number land on that star${hid?` (plus ${hid} hidden 隐 pair${hid>1?'s':''})`:''}. Tap to explore.<span class="zl">每侧由弱到强。角标显示号码中落在该星的数字组数${hid?`（另有 ${hid} 组隐）`:''}。点击查看。</span></div>
+<div class="spec">${S.map(s=>`<button class="sp ${cnt[s.z]?'me':''}" style="--c:${s.col}" onclick="say('<b>${s.z}</b> ${s.py} · ${s.en} · ${s.el} ${EN[s.el]}<br>${s.p.join(' · ')}')">${cnt[s.z]?`<span class="mk">${cnt[s.z]}</span>`:''}${s.z}<small>${s.r>0?'+'+s.r:s.r}</small></button>`).join('')}</div>
+<div class="axis"><span>◀ Most inauspicious 最凶</span><span>Most auspicious 最吉 ▶</span></div>`}
+function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<small>${s.py}</small></h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">${s.en} · ${s.el} ${EN[s.el]}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}')">${x}</button>`).join('')}</div></div>`).join('')}
+function tb(){
+v.innerHTML=`<div class="cols"><div><div class="ch2" style="background:#2f8f68">四吉星 Auspicious</div>${col(true)}</div><div><div class="ch2" style="background:#c8503c">四凶星 Inauspicious</div>${col(false)}</div></div><div class="note" style="color:var(--mut)">Strongest star first in each column.</div>`}
+const v=document.getElementById('v');nav();R();
+function tick(){const d=new Date();document.getElementById('clk').textContent=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' ('+d.toLocaleDateString('zh-CN',{weekday:'short'})+') · '+d.toLocaleTimeString('en-GB')}
+tick();setInterval(tick,1000);
+</script></body></html>
