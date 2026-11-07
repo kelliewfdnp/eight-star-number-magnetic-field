@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>八星数字磁场 — 如何看吉凶星 | Eight-Star Numerical Magnetic Field</title>
+<title>八星数字磁场：如何判断吉凶星 | Eight-Star Number Magnetic Field</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -90,8 +90,11 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .cols{row-gap:0}.cols .ch2{margin-bottom:10px}.cols .card{margin-bottom:10px}
 @supports (grid-template-rows:subgrid){.cols .card.sc{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}}
 .en2{font-size:13px;font-weight:600;color:var(--mut);line-height:1.35;margin-top:2px}
+.sc.g h3{margin:0;font-family:Inter,"PingFang SC","Noto Sans SC",sans-serif;font-size:clamp(15px,4.4vw,19px);font-weight:700;line-height:1.25}
+.gr{margin-top:11px;font-size:14px}.gr div{line-height:1.4}.gl2{display:inline-block;font-size:11.5px;font-weight:700;color:#fff;border-radius:20px;padding:2px 10px;margin-bottom:4px}
+.l-r{background:#5b6fd6}.l-s{background:#2f8f68}.l-w{background:#b9741a}
 </style></head><body>
-<header><div class="hin"><div class="logo">数</div><div><h1>八星数字磁场 — 如何看吉凶星</h1><div class="en2">Eight-Star Numerical Magnetic Field<br>How to Read Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
+<header><div class="hin"><div class="logo">数</div><div><h1>八星数字磁场：如何判断吉凶星</h1><div class="en2">Eight-Star Number Magnetic Field<br>How to Interpret Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
 <script>
 const DE={1:'水',6:'水',2:'火',7:'火',3:'木',8:'木',4:'金',9:'金',5:'土',0:'土'},EC={水:'--W',火:'--F',木:'--M',金:'--J',土:'--T'};
@@ -113,9 +116,9 @@ function say(t){info.innerHTML=t;info.style.display='block';clearTimeout(tm);tm=
 const pc=p=>{const r=pr(p);return `<button class="pc ${r.hid?'hid':''}" style="--c:${r.col}" onclick="say('<b>${p}</b> → ${r.z} · ${r.en}')">${p}<small>${r.z}</small></button>`};
 let QV='';
 const EN={水:'Water',火:'Fire',木:'Wood',金:'Metal',土:'Earth'};
-const tabs=['Number Lab 号码分析','Star Tables 星表'];let cur=0;
+const tabs=['Number Lab 号码分析','Star Tables 星表','Star Guide 星曜详解'];let cur=0;
 function nav(){document.getElementById('nav').innerHTML=tabs.map((t,i)=>`<button class="${i==cur?'on':''}" onclick="cur=${i};nav();R()">${i+1}. ${t}</button>`).join('')}
-function R(){info.style.display='none';[lab,tb][cur]();scrollTo(0,0)}
+function R(){info.style.display='none';[lab,tb,gd][cur]();scrollTo(0,0)}
 function lab(){
 v.innerHTML=`<div class="card"><h2>Key in any number <span class="z">输入任意号码</span></h2><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div><input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)"><div class="pairs" id="o"></div></div>
 <div class="card"><h2>Digit elements <span class="z">数字五行</span></h2><div class="sb">Tap an element to see its digits.<span class="zl">点击五行，查看对应数字。</span></div><div class="leg">${[['水','1 · 6'],['火','2 · 7'],['木','3 · 8'],['金','4 · 9'],['土','5 · 0']].map(([e,d])=>`<div style="--e:var(${EC[e]})" onclick="say('${e} ${EN[e]}: digits 数字 ${d}')">${e}<em>${EN[e]}</em><span>${d}</span></div>`).join('')}</div></div>
@@ -132,6 +135,18 @@ document.getElementById('spw').innerHTML=`<h2>Star spectrum <span class="z">星�
 function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<br>${s.en}</h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">Element 五行：${EN[s.el]} ${s.el}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}')">${x}</button>`).join('')}</div></div>`)}
 function tb(){
 v.innerHTML=`<div class="cols"><div class="ch2" style="background:#2f8f68">四吉星 Auspicious</div><div class="ch2" style="background:#c8503c">四凶星 Inauspicious</div>${(()=>{const A=col(true),B=col(false);return A.map((x,i)=>x+B[i]).join('')})()}</div><div class="note" style="color:var(--mut)">Strongest star first in each column.</div>`}
+const G={
+延年:{r:['Career, leadership and health','事业、领导力与健康'],s:['Strong professional ability; good at preserving wealth','专业能力强，善于守财'],w:['Stubborn, domineering, stressed and overworked','固执、强势、压力大、劳碌']},
+天医:{r:['Wealth, marriage and wisdom','财富、婚姻与智慧'],s:['Naturally kind; good regular income','天性善良，正财运佳'],w:['Innocent nature can make one gullible and easily deceived','单纯易轻信他人而被骗']},
+生气:{r:['Benefactors, popularity and optimism','贵人、人缘与乐观'],s:['Cheerful and easily receives help','心态开朗，易得帮助'],w:['May lack drive (too easy-going) and spend too freely','过于随缘而缺乏行动力，花钱大方难守财']},
+伏位:{r:['Waiting, accumulation and stability','等待、积蓄与稳定'],s:['Patient and persistent','极具耐心与毅力'],w:['Overly conservative and passive; insecurity often means missed opportunities','过于保守被动，缺乏安全感而错失时机']},
+绝命:{r:['Investment, financial loss and drastic ups and downs','投资、破财与大起大落'],s:['Bold and action-oriented','敢拼敢闯，行动力强'],w:['Impulsive and irritable; unstable emotions and finances','易冲动暴躁，情绪与财务均不稳定']},
+五鬼:{r:['Change, talent and instability','变动、才华与不稳定'],s:['Quick-thinking and resourceful','思维敏捷、反应快、计谋多'],w:['Fickle; prone to unrest or setbacks','想法多变，易有不安定感或遭遇波折']},
+六煞:{r:['Romantic entanglements, interpersonal complications and fashion','偏桃花、人际纠葛与时尚'],s:['Sociable with good romantic luck','异性缘好，善于交际'],w:['Emotional and indecisive; often troubled by relationships','情绪化、优柔寡断，常为感情或人际关系所困']},
+祸害:{r:['Speech, gossip/conflict and illness','口才、口舌是非与病痛'],s:['Eloquent; can make a living by speaking','能说会道，可靠口才谋生'],w:['Prone to trouble from words, petty people or arguments','易因言惹祸，招惹小人或引发争执']}};
+function gd(){
+const grp=g=>[...S].filter(x=>(x.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(x=>{const d=G[x.z];return `<div class="card sc g" style="--c:${x.col}"><div class="sh"><h3>${x.z}<br>${x.en}</h3><span class="tag">${x.r>0?'+'+x.r:x.r}</span></div><div class="sb" style="margin:3px 0 0">Element 五行：${EN[x.el]} ${x.el}</div>${[['r','Represents 代表','l-r'],['s','Strength 优点','l-s'],['w','Weakness 缺点','l-w']].map(([k,l,c])=>`<div class="gr"><span class="gl2 ${c}">${l}</span><div>${d[k][0]}</div><div>${d[k][1]}</div></div>`).join('')}</div>`}).join('');
+v.innerHTML=`<div class="sb" style="margin-bottom:10px">Core meaning and traits of each star.<span class="zl">每颗星的核心含义与特质。</span></div><div class="ch2" style="background:#2f8f68;margin-bottom:10px">四吉星 Auspicious</div>${grp(true)}<div class="ch2" style="background:#c8503c;margin:4px 0 10px">四凶星 Inauspicious</div>${grp(false)}`}
 const v=document.getElementById('v');nav();R();
 function tick(){const d=new Date();document.getElementById('clk').textContent=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' ('+d.toLocaleDateString('zh-CN',{weekday:'short'})+') · '+d.toLocaleTimeString('en-GB')}
 tick();setInterval(tick,1000);
