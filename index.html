@@ -96,6 +96,15 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .lg{display:flex;flex-direction:column;align-items:center;gap:6px;flex:none}.tj{width:38px;height:38px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
 .hin{align-items:stretch}.lg{gap:0;align-self:stretch}.lh{flex:1;display:flex;align-items:center;justify-content:center;min-height:36px}.tj{width:30px;height:30px}.logo{width:30px;height:30px;border-radius:50%;font-size:13px}
 .logo{background:#2F8F68}
+.tp{display:inline-block;background:var(--c);color:#fff;font:700 12.5px "PingFang SC","Noto Sans SC",Inter,sans-serif;border-radius:20px;padding:3px 10px;margin:6px 6px 0 0}
+.strip{display:flex;flex-wrap:wrap;gap:2px;flex:1}.strip i{width:12px;height:12px;border-radius:3px;background:var(--c)}
+.hi{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line)}.hi:last-child{border-bottom:0}.hi b{font-size:16px;letter-spacing:.5px}
+.mb{border:1px solid var(--line);background:var(--soft);color:var(--fg);border-radius:8px;padding:5px 10px;font:700 12px Inter,sans-serif;white-space:nowrap}
+.ct{display:grid;grid-template-columns:1fr 62px 62px;gap:6px 8px;align-items:center;margin-top:8px;font-size:14px}
+.ct .hd{font-size:12px;font-weight:700;color:var(--mut);text-align:center;overflow:hidden;text-overflow:ellipsis}.nm2{font-weight:600}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:7px}
+.cc{text-align:center;border-radius:8px;padding:4px 0;color:var(--mut);background:var(--soft)}.cc.on{background:var(--c);color:#fff;font-weight:800}
+.card .sh h2{margin:0}
 </style></head><body>
 <header><div class="hin"><div class="lg"><div class="lh"><svg class="tj" viewBox="0 0 100 100" role="img" aria-label="太极"><circle cx="50" cy="50" r="48" fill="#fff" stroke="#000" stroke-width="2"/><path d="M50 2a48 48 0 0 1 0 96a24 24 0 0 1 0-48a24 24 0 0 0 0-48z" fill="#000"/><circle cx="50" cy="26" r="7" fill="#000"/><circle cx="50" cy="74" r="7" fill="#fff"/></svg></div><div class="lh"><div class="logo">数</div></div></div><div><h1>八星数字磁场：如何判断吉凶星</h1><div class="en2">Eight-Star Number Magnetic Field<br>How to Interpret Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
@@ -122,13 +131,35 @@ const EN={水:'Water',火:'Fire',木:'Wood',金:'Metal',土:'Earth'};
 const tabs=['Number Lab 号码分析','Star Tables 星表','Star Guide 星曜详解'];let cur=0;
 function nav(){document.getElementById('nav').innerHTML=tabs.map((t,i)=>`<button class="${i==cur?'on':''}" onclick="cur=${i};nav();R()">${i+1}. ${t}</button>`).join('')}
 function R(){info.style.display='none';[lab,tb,gd][cur]();scrollTo(0,0)}
+let QB='';
+const LS=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'[]');localStorage.setItem(k,JSON.stringify(v))}catch(e){return[]}};
+function tl(n){const ps=n.length>1?pairs(n).map(pr):[],c={};let h=0;ps.forEach(r=>{if(r.hid)h++;else c[r.s.z]=(c[r.s.z]||0)+1});
+const sum=g=>S.filter(s=>(s.r>0)==g).reduce((x,s)=>x+(c[s.z]||0),0);return{ps,c,h,good:sum(true),bad:sum(false)}}
+function tallyHTML(n){const t=tl(n);if(!t.ps.length)return '';
+return `<div class="sb" style="margin:12px 0 0">Tally 统计</div>`+[...S].sort((a,b)=>b.r-a.r).filter(s=>t.c[s.z]).map(s=>`<span class="tp" style="--c:${s.col}">${s.z} ×${t.c[s.z]}</span>`).join('')+(t.h?`<span class="tp" style="--c:#94a3b8">隐 ×${t.h}</span>`:'')}
+const strip=n=>pairs(n).map(p=>`<i style="--c:${pr(p).col}"></i>`).join('');
 function lab(){
-v.innerHTML=`<div class="card"><h2>Key in any number <span class="z">输入任意号码</span></h2><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div><input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)"><div class="pairs" id="o"></div></div>
+v.innerHTML=`<div class="card"><h2>Key in any number <span class="z">输入任意号码</span></h2><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div><input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)" onchange="sv(this.value)"><div class="pairs" id="o"></div><div id="t1"></div></div>
+<div class="card"><h2>Compare with another number <span class="z">对比另一个号码</span></h2><div class="sb">Key in a second number to compare the two.<span class="zl">输入第二个号码，对比两者。</span></div><input id="q2" inputmode="numeric" placeholder="e.g. 91421358" value="${QB}" oninput="an2(this.value)" onchange="sv(this.value)"><div class="pairs" id="o2"></div><div id="t2"></div><div id="cmp"></div></div>
+<div class="card"><div class="sh"><h2>History <span class="z">历史记录</span></h2><button class="mb" onclick="clr()">Clear all 清除全部</button></div><div class="sb">Saved on this device when you tap away from the box. Load a number into A or B.<span class="zl">离开输入框时自动保存在本设备。可载入到 A 或 B。</span></div><div id="hist"></div></div>
 <div class="card"><h2>Digit elements <span class="z">数字五行</span></h2><div class="sb">Tap an element to see its digits.<span class="zl">点击五行，查看对应数字。</span></div><div class="leg">${[['水','1 · 6'],['火','2 · 7'],['木','3 · 8'],['金','4 · 9'],['土','5 · 0']].map(([e,d])=>`<div style="--e:var(${EC[e]})" onclick="say('${e} ${EN[e]}: digits 数字 ${d}')">${e}<em>${EN[e]}</em><span>${d}</span></div>`).join('')}</div></div>
 <div class="card" id="spw"></div>
 <div class="card"><h2>The ladder <span class="z">星曜强弱</span></h2><div class="sb" style="margin:0">Order of strength within the stars 星的强弱顺序：<br><b>Auspicious / 吉星:</b> 伏位 &lt; 生气 &lt; 天医 &lt; 延年<br><b>Inauspicious / 凶星:</b> 六煞 &lt; 祸害 &lt; 五鬼 &lt; 绝命</div></div>`;
-an(QV)}
-function an(x){x=x.replace(/\D/g,'');QV=x;document.getElementById('o').innerHTML=x.length>1?pairs(x).map(pc).join(''):'';spec()}
+an(QV);an2(QB);hist()}
+function an(x){x=x.replace(/\D/g,'');QV=x;document.getElementById('o').innerHTML=x.length>1?pairs(x).map(pc).join(''):'';document.getElementById('t1').innerHTML=tallyHTML(x);spec();cmp()}
+function an2(x){x=x.replace(/\D/g,'');QB=x;document.getElementById('o2').innerHTML=x.length>1?pairs(x).map(pc).join(''):'';document.getElementById('t2').innerHTML=tallyHTML(x);cmp()}
+function cmp(){const el=document.getElementById('cmp');if(!el)return;if(QV.length<2||QB.length<2){el.innerHTML='';return}
+const a=tl(QV),b=tl(QB),cell=(n,c)=>`<div class="cc ${n?'on':''}" style="--c:${c}">${n||'–'}</div>`;
+const row=(lab,x,y,c,dot)=>`<div class="nm2">${dot?`<span class="dot" style="--c:${c}"></span>`:''}${lab}</div>${cell(x,c)}${cell(y,c)}`;
+el.innerHTML=`<div class="sb" style="margin:14px 0 0">Comparison 对比</div><div class="ct"><div></div><div class="hd">A<br>${QV}</div><div class="hd">B<br>${QB}</div>
+${row('吉 Auspicious pairs',a.good,b.good,'#2f8f68')}${row('凶 Inauspicious pairs',a.bad,b.bad,'#c8503c')}${row('隐 Hidden pairs',a.h,b.h,'#94a3b8')}
+${[...S].sort((p,q)=>q.r-p.r).filter(s=>a.c[s.z]||b.c[s.z]).map(s=>row(s.z+' '+s.en,a.c[s.z]||0,b.c[s.z]||0,s.col,1)).join('')}</div>`}
+function hist(){const el=document.getElementById('hist');if(!el)return;const H=LS('nc_hist');
+el.innerHTML=H.length?H.map((n,i)=>`<div class="hi"><b>${n}</b><span class="strip">${strip(n)}</span><button class="mb" onclick="ld('A',${i})">A</button><button class="mb" onclick="ld('B',${i})">B</button><button class="mb" onclick="del(${i})">×</button></div>`).join(''):'<div class="sb" style="margin:0">No numbers saved yet. 暂无记录。</div>'}
+function sv(x){x=x.replace(/\D/g,'');if(x.length<2)return;LS('nc_hist',[x,...LS('nc_hist').filter(n=>n!=x)].slice(0,20));hist()}
+function ld(w,i){const n=LS('nc_hist')[i];if(!n)return;if(w=='A'){document.getElementById('q').value=n;an(n)}else{document.getElementById('q2').value=n;an2(n)}scrollTo({top:0,behavior:'smooth'})}
+function del(i){const H=LS('nc_hist');H.splice(i,1);LS('nc_hist',H);hist()}
+function clr(){LS('nc_hist',[]);hist()}
 function spec(){
 const ps=QV.length>1?pairs(QV).map(pr):[],cnt={};ps.forEach(r=>{if(r.s)cnt[r.s.z]=(cnt[r.s.z]||0)+1});
 const hid=ps.filter(r=>r.hid).length;
