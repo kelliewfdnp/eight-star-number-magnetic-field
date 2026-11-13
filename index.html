@@ -7,7 +7,7 @@
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 --bg:#f8fafc;--fg:#1e293b;--mut:#64748b;--card:#fff;--line:#e2e8f0;--soft:#f1f5f9;--em:#2f8f68;--em2:#4aa882;--hd:#fff;
---W:#cfe6f5;--F:#f6cdbf;--M:#cfe9d3;--J:#d6dfdc;--T:#e7caa0}
+--W:#cfe6f5;--F:#f6cdbf;--M:#cfe9d3;--J:#f6e08a;--T:#e2dcd2}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--fg:#e2e8f0;--mut:#94a3b8;--card:#1e293b;--line:#334155;--soft:#273449;--hd:#1e293b;
 --W:#2b5873;--F:#7a3f31;--M:#2f6340;--J:#7a6a1c;--T:#5a534b}}
 :root[data-theme="dark"]{--bg:#0f172a;--fg:#e2e8f0;--mut:#94a3b8;--card:#1e293b;--line:#334155;--soft:#273449;--hd:#1e293b;--W:#2b5873;--F:#7a3f31;--M:#2f6340;--J:#7a6a1c;--T:#5a534b}
@@ -121,8 +121,8 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 
 :root{--fvc:#1f7a55;--avc:#9b2c2c;--fvr:#1f7a55;--avr:#9b2c2c}
 .leg .bg{box-shadow:0 0 0 1px rgba(15,23,42,.65)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#76807b;--T:#946248}:root:not([data-theme="light"]) .leg div{color:#fff}:root:not([data-theme="light"]) .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}}
-:root[data-theme="dark"]{--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#76807b;--T:#946248}:root[data-theme="dark"] .leg div{color:#fff}:root[data-theme="dark"] .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#b08a12;--T:#5a534b}:root:not([data-theme="light"]) .leg div{color:#fff}:root:not([data-theme="light"]) .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}}
+:root[data-theme="dark"]{--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#b08a12;--T:#5a534b}:root[data-theme="dark"] .leg div{color:#fff}:root[data-theme="dark"] .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}
 .leg div{isolation:isolate;container-type:inline-size;border-width:3px;overflow:hidden}
 .leg .wm{position:absolute;left:50%;top:50%;height:84%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 min(50cqw,44px)/1 "PingFang SC","Noto Sans SC",serif;opacity:.13;z-index:-1;pointer-events:none}
 .leg .jx{opacity:.45;transform:none;box-shadow:none}
@@ -139,7 +139,11 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .leg div{text-shadow:0 1px 2px rgba(0,0,0,.0)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .leg div{text-shadow:0 1px 2px rgba(0,0,0,.4)}}
 :root[data-theme="dark"] .leg div{text-shadow:0 1px 2px rgba(0,0,0,.4)}
-.sh.hh{flex-direction:row;align-items:center;gap:14px;margin-bottom:16px}.sh.hh h2{margin:0}.sh.hh .mb{padding:10px 16px;font-size:13px;border-radius:11px}
+.sh.hh{flex-direction:row;align-items:center;gap:14px;margin-bottom:16px}.sh.hh h2{margin:0}.sh.hh .mb{display:inline-flex;align-items:center}
+.pd{position:relative;display:inline-block;flex:none;width:8px;height:8px;margin-right:8px;border-radius:50%;background:#4cb583}
+.pd::after{content:"";position:absolute;inset:0;border-radius:50%;background:#4cb583;animation:pdp 1.8s ease-out infinite}
+@keyframes pdp{0%{transform:scale(1);opacity:.7}100%{transform:scale(3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.pd::after{animation:none}}
 </style></head><body>
 <header><div class="hin"><div class="lg"><div class="lh"><svg class="tj" viewBox="0 0 100 100" role="img" aria-label="太极"><circle cx="50" cy="50" r="48" fill="#fff" stroke="#000" stroke-width="2"/><path d="M50 2a48 48 0 0 1 0 96a24 24 0 0 1 0-48a24 24 0 0 0 0-48z" fill="#000"/><circle cx="50" cy="26" r="7" fill="#000"/><circle cx="50" cy="74" r="7" fill="#fff"/></svg></div><div class="lh"><div class="logo">数</div></div></div><div><h1>八星数字磁场：如何判断吉凶星</h1><div class="en2">Eight-Star Number Magnetic Field<br>How to Interpret Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
@@ -184,7 +188,7 @@ const strip=n=>pairs(n).map(p=>`<i style="--c:${pr(p).col}"></i>`).join('');
 function lab(){
 v.innerHTML=`<div class="card"><h2>Enter any number <span class="z">输入任意号码</span></h2><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div><input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)" onchange="sv(this.value)"><div class="pairs" id="o"></div><div id="t1"></div></div>
 <div class="card"><h2>Compare with another number <span class="z">对比另一个号码</span></h2><div class="sb">Enter a second number to compare the two.<span class="zl">输入第二个号码，对比两者。</span></div><input id="q2" inputmode="numeric" placeholder="e.g. 91421358" value="${QB}" oninput="an2(this.value)" onchange="sv(this.value)"><div class="pairs" id="o2"></div><div id="t2"></div><div id="cmp"></div></div>
-<div class="card"><div class="sh hh"><h2>History <span class="z">历史记录</span></h2><button class="mb" onclick="clr()">Clear all 清除全部</button></div><div class="sb">Saved on this device when you tap away from the box. Load a number into A or B.<span class="zl">离开输入框时自动保存在本设备。可载入到 A 或 B。</span></div><div id="hist"></div></div>
+<div class="card"><div class="sh hh"><h2>History <span class="z">历史记录</span></h2><button class="mb" onclick="clr()"><i class="pd"></i>Clear all 清除全部</button></div><div class="sb">Saved on this device when you tap away from the box. Load a number into A or B.<span class="zl">离开输入框时自动保存在本设备。可载入到 A 或 B。</span></div><div id="hist"></div></div>
 <div class="card" id="eld">${elHTML()}</div>
 <div class="card" id="spw"></div>
 <div class="card"><h2>Star Strength Order <span class="z">星曜强弱</span></h2><div class="sb" style="margin:0"><b>Auspicious 吉星</b><br>Stability &lt; Life Generating &lt; Heavenly Doctor &lt; Longevity<br>伏位 &lt; 生气 &lt; 天医 &lt; 延年<br><br><b>Inauspicious 凶星</b><br>Six Killings &lt; Mishaps &lt; Five Ghosts &lt; Life Threatening<br>六煞 &lt; 祸害 &lt; 五鬼 &lt; 绝命</div></div>`;
