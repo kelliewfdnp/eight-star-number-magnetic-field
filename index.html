@@ -123,13 +123,19 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .leg .bg{box-shadow:0 0 0 1px rgba(15,23,42,.65)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#b08a12}:root:not([data-theme="light"]) .leg div{color:#fff}:root:not([data-theme="light"]) .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}}
 :root[data-theme="dark"]{--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#b08a12}:root[data-theme="dark"] .leg div{color:#fff}:root[data-theme="dark"] .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}
-.leg div{isolation:isolate;container-type:inline-size;border-width:2px;overflow:hidden}
+.leg div{isolation:isolate;container-type:inline-size;border-width:3px;overflow:hidden}
 .leg .wm{position:absolute;left:50%;top:50%;height:84%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 min(50cqw,44px)/1 "PingFang SC","Noto Sans SC",serif;opacity:.13;z-index:-1;pointer-events:none}
 .leg .jx{opacity:.45;transform:none;box-shadow:none}
 .ch.fv,.ch.av,.ch.fv.av{outline-width:2px;box-shadow:none!important}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .leg .fx,:root:not([data-theme="light"]) .leg .jx{border-color:var(--fg)}}
 :root[data-theme="dark"] .leg .fx,:root[data-theme="dark"] .leg .jx{border-color:var(--fg)}
 .ch.av,.ch.fv.av{opacity:.5}
+@media (max-width:640px){
+.spec{gap:7px;padding-top:22px;margin-top:22px;margin-bottom:6px}
+.sp{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:16px 0 14px;min-height:112px}
+.sp .vz{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:4px;line-height:1;font-size:16px;margin-bottom:-4px}
+.sp small{font-size:11px}
+}
 </style></head><body>
 <header><div class="hin"><div class="lg"><div class="lh"><svg class="tj" viewBox="0 0 100 100" role="img" aria-label="太极"><circle cx="50" cy="50" r="48" fill="#fff" stroke="#000" stroke-width="2"/><path d="M50 2a48 48 0 0 1 0 96a24 24 0 0 1 0-48a24 24 0 0 0 0-48z" fill="#000"/><circle cx="50" cy="26" r="7" fill="#000"/><circle cx="50" cy="74" r="7" fill="#fff"/></svg></div><div class="lh"><div class="logo">数</div></div></div><div><h1>八星数字磁场：如何判断吉凶星</h1><div class="en2">Eight-Star Number Magnetic Field<br>How to Interpret Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
@@ -197,7 +203,7 @@ function spec(){
 const ps=QV.length>1?pairs(QV).map(pr):[],cnt={};ps.forEach(r=>{if(r.s)cnt[r.s.z]=(cnt[r.s.z]||0)+1});
 const hid=ps.filter(r=>r.hid).length;
 document.getElementById('spw').innerHTML=`<h2>Star spectrum <span class="z">星曜光谱</span></h2><div class="sb">Weakest to strongest on each side. A badge shows how many pairs of your number land on that star${hid?` (plus ${hid} hidden 隐 pair${hid>1?'s':''})`:''}. Tap to explore.<span class="zl">每侧由弱到强。角标显示号码中落在该星的数字组数${hid?`（另有 ${hid} 组隐）`:''}。点击查看。</span></div>
-<div class="spec">${S.map(s=>`<button class="sp ${cnt[s.z]?'me':''}" style="--c:${s.col}" onclick="say('<b>${s.z}</b> ${s.en} · ${s.el} ${EN[s.el]}<br>${s.p.join(' · ')}')">${cnt[s.z]?`<span class="mk">${cnt[s.z]}</span>`:''}${s.z}<small>${s.r>0?'+'+s.r:s.r}</small></button>`).join('')}</div>
+<div class="spec">${S.map(s=>`<button class="sp ${cnt[s.z]?'me':''}" style="--c:${s.col}" onclick="say('<b>${s.z}</b> ${s.en} · ${s.el} ${EN[s.el]}<br>${s.p.join(' · ')}')">${cnt[s.z]?`<span class="mk">${cnt[s.z]}</span>`:''}<span class="vz">${s.z}</span><small>${s.r>0?'+'+s.r:s.r}</small></button>`).join('')}</div>
 <div class="axis"><span>◀ Most inauspicious 最凶</span><span>Most auspicious 最吉 ▶</span></div>`}
 function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<br>${s.en}</h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">Element 五行：${EN[s.el]} ${s.el}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}${hl(x,s.r>0)}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}${hl(x).includes('fv')?' · contains 喜用 digit':''}${hl(x).includes('av')?' · contains 忌凶 digit':''}')">${x}</button>`).join('')}</div></div>`)}
 function tb(){
