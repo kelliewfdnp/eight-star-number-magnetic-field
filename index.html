@@ -83,7 +83,9 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .cols .card{padding:10px;margin-bottom:10px}.cols .sh h3{font-size:19px}.cols .sh h3 small{display:block;margin:0;font-size:11px}
 .cols .tag{font-size:10.5px;padding:2px 7px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.g2 .ch{min-width:0;padding:7px 4px;font-size:14px;text-align:center}
 .ch.ya,.ch.ra{border:0;color:var(--fg)}.ch.ya{background:rgba(234,179,8,.38)}.ch.ra{background:rgba(239,68,68,.17)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ch.ya{background:rgba(234,179,8,.42);color:#fff}:root:not([data-theme="light"]) .ch.ra{background:rgba(239,68,68,.34);color:#fff}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ch.ya{background:rgba(52,211,153,.16);box-shadow:inset 0 0 0 1px rgba(52,211,153,.55);color:#b7f5d8}:root:not([data-theme="light"]) .ch.ya:active{background:rgba(52,211,153,.3)}}
+:root[data-theme="dark"] .ch.ya{background:rgba(52,211,153,.16);box-shadow:inset 0 0 0 1px rgba(52,211,153,.55);color:#b7f5d8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ch.ra{background:rgba(239,68,68,.34);color:#fff}}
 .z{font-weight:700;color:var(--mut);font-size:1em;margin-left:6px}.zl{display:block;margin-top:2px}.leg em{display:block;font:600 11px Inter;font-style:normal;opacity:.8}
 .cols{align-items:stretch}.cols .card{margin-bottom:0}.cols .ch2{margin:0}
 .cols .sh h3{font-family:Inter,"PingFang SC","Noto Sans SC",sans-serif;font-size:clamp(14px,4vw,19px);font-weight:700;line-height:1.25}
@@ -180,7 +182,7 @@ const G={
 祸害:{r:['Speech, gossip/conflict and illness','口才、口舌是非与病痛'],s:['Eloquent; can make a living by speaking','能说会道，可靠口才谋生'],w:['Prone to trouble from words, petty people or arguments','易因言惹祸，招惹小人或引发争执']}};
 function gd(){
 const grp=g=>[...S].filter(x=>(x.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(x=>{const d=G[x.z];return `<div class="card sc g" style="--c:${x.col}"><div class="sh"><h3>${x.z}<br>${x.en}</h3><span class="tag">${x.r>0?'+'+x.r:x.r}</span></div><div class="sb" style="margin:3px 0 0">Element 五行：${EN[x.el]} ${x.el}</div>${[['r','Represents 代表','l-r'],['s','Strength 优点','l-s'],['w','Weakness 缺点','l-w']].map(([k,l,c])=>`<div class="gr"><span class="gl2 ${c}">${l}</span><div>${d[k][0]}</div><div>${d[k][1]}</div></div>`).join('')}</div>`}).join('');
-v.innerHTML=`<div class="sb" style="margin-bottom:10px">Core meaning and traits of each star.<span class="zl">每颗星的核心含义与特质。</span></div><div class="ch2" style="background:#2f8f68;margin-bottom:10px">四吉星 Auspicious</div>${grp(true)}<div class="ch2" style="background:#c8503c;margin:4px 0 10px">四凶星 Inauspicious</div>${grp(false)}`}
+v.innerHTML=`<div class="sb" style="margin-bottom:10px">Core meaning and traits of each star.<span class="zl">每颗星的核心含义与特质。</span></div><div class="ch2" style="background:#2f8f68;margin-bottom:10px">四吉星 Auspicious Stars</div>${grp(true)}<div class="ch2" style="background:#c8503c;margin:4px 0 10px">四凶星 Inauspicious Stars</div>${grp(false)}`}
 const v=document.getElementById('v');nav();R();
 function tick(){const d=new Date();document.getElementById('clk').textContent=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' ('+d.toLocaleDateString('zh-CN',{weekday:'short'})+') · '+d.toLocaleTimeString('en-GB')}
 tick();setInterval(tick,1000);
