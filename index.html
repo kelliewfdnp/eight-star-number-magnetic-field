@@ -107,6 +107,22 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:7px}
 .cc{text-align:center;border-radius:8px;padding:4px 0;color:var(--mut);background:var(--soft)}.cc.on{background:var(--c);color:#fff;font-weight:800}
 .card .sh h2{margin:0}
+.leg{gap:10px 9px}.leg div{position:relative}
+.leg div{border:3px solid transparent}.leg .fx,.leg .jx{transform:translateY(-4px);box-shadow:0 6px 14px rgba(0,0,0,.28)}.leg .fx{border-color:var(--fvc)}.leg .jx{border-color:var(--avc)}
+.leg .bg{position:absolute;top:-10px;right:-6px;min-width:22px;height:22px;border-radius:11px;color:#fff;font:800 12px "PingFang SC","Noto Sans SC",Inter,sans-serif;display:flex;align-items:center;justify-content:center;border:2px solid var(--card);padding:0 4px}
+.leg .fx .bg{background:var(--fvc)}.leg .jx .bg{background:var(--avc)}
+.ft{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.ft button{border:1px solid var(--line);background:var(--soft);color:var(--fg);border-radius:10px;padding:7px 11px;font:700 13px "PingFang SC","Noto Sans SC",Inter,sans-serif}
+.ft.x button.on{background:var(--fvc);border-color:var(--fvc);color:#fff}.ft.j button.on{background:var(--avc);border-color:var(--avc);color:#fff}
+.g2{gap:9px 8px}
+.ch.fv{outline:3px solid var(--fvr);outline-offset:0}.ch.av,.ch.fv.av{outline:3px solid var(--avr);outline-offset:0}
+.kr{display:inline-block;font:700 12.5px "PingFang SC","Noto Sans SC",Inter,sans-serif;border-radius:20px;padding:3px 10px;margin:0 6px 4px 0;color:#fff}.kx{background:var(--fvc)}.kj{background:var(--avc)}
+.kb{margin:0 0 12px;font-size:12.5px;color:var(--mut)}
+
+:root{--fvc:#1f7a55;--avc:#9b2c2c;--fvr:#1f7a55;--avr:#9b2c2c}
+.leg .bg{box-shadow:0 0 0 1px rgba(15,23,42,.65)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#b08a12}:root:not([data-theme="light"]) .leg div{color:#fff}:root:not([data-theme="light"]) .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}}
+:root[data-theme="dark"]{--fvr:#34d399;--avr:#f87171;--F:#c8502f;--J:#b08a12}:root[data-theme="dark"] .leg div{color:#fff}:root[data-theme="dark"] .leg .bg{box-shadow:0 0 0 1px rgba(226,232,240,.55)}
 </style></head><body>
 <header><div class="hin"><div class="lg"><div class="lh"><svg class="tj" viewBox="0 0 100 100" role="img" aria-label="太极"><circle cx="50" cy="50" r="48" fill="#fff" stroke="#000" stroke-width="2"/><path d="M50 2a48 48 0 0 1 0 96a24 24 0 0 1 0-48a24 24 0 0 0 0-48z" fill="#000"/><circle cx="50" cy="26" r="7" fill="#000"/><circle cx="50" cy="74" r="7" fill="#fff"/></svg></div><div class="lh"><div class="logo">数</div></div></div><div><h1>八星数字磁场：如何判断吉凶星</h1><div class="en2">Eight-Star Number Magnetic Field<br>How to Interpret Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
@@ -129,12 +145,20 @@ const info=document.getElementById('info');let tm;
 function say(t){info.innerHTML=t;info.style.display='block';clearTimeout(tm);tm=setTimeout(()=>info.style.display='none',6000)}
 const pc=p=>{const r=pr(p);return `<button class="pc ${r.hid?'hid':''}" style="--c:${r.col}" onclick="say('<b>${p}</b> → ${r.z} · ${r.en}')">${p}<small>${r.z}</small></button>`};
 let QV='';
+const ELS=['水','火','木','金','土'],ELD={水:'1 · 6',火:'2 · 7',木:'3 · 8',金:'4 · 9',土:'5 · 0'};
+function setEL(k,e){const o=k=='x'?'j':'x';EL[o]=EL[o].filter(y=>y!=e);EL[k]=EL[k].includes(e)?EL[k].filter(y=>y!=e):[...EL[k],e];LS('nc_el',EL);const c=document.getElementById('eld');if(c)c.innerHTML=elHTML()}
+function hl(x){let f=0,a=0;new Set(x.replace('/','').split('')).forEach(k=>{const e=DE[k];if(EL.x.includes(e))f=1;if(EL.j.includes(e))a=1});return (f?' fv':'')+(a?' av':'')}
+function elHTML(){return `<h2>Digit elements <span class="z">数字五行</span></h2><div class="sb">Tap an element to see its digits. Set your 喜用之神 and 忌凶之神 to ring them here and highlight matching pairs in Star Tables.<span class="zl">点击五行查看数字。设定喜用之神与忌凶之神后，此处会加圈标示，星表中含有这些数字的数字组也会被标出。</span></div>
+<div class="leg">${ELS.map(e=>`<div class="${EL.x.includes(e)?'fx':EL.j.includes(e)?'jx':''}" style="--e:var(${EC[e]})" onclick="say('${e} ${EN[e]}: digits 数字 ${ELD[e]}${EL.x.includes(e)?' · 喜用 favourable':EL.j.includes(e)?' · 忌凶 unfavourable':''}')">${EL.x.includes(e)?'<i class="bg">喜</i>':EL.j.includes(e)?'<i class="bg">忌</i>':''}${e}<em>${EN[e]}</em><span>${ELD[e]}</span></div>`).join('')}</div>
+<div class="sb" style="margin:14px 0 0"><b>喜用之神</b> Favourable elements (green ring)</div><div class="ft x">${ELS.map(e=>`<button class="${EL.x.includes(e)?'on':''}" onclick="setEL('x','${e}')">${e} ${EN[e]}</button>`).join('')}</div>
+<div class="sb" style="margin:0"><b>忌凶之神</b> Unfavourable elements — inauspicious digits (red ring)</div><div class="ft j">${ELS.map(e=>`<button class="${EL.j.includes(e)?'on':''}" onclick="setEL('j','${e}')">${e} ${EN[e]}</button>`).join('')}</div>`}
 const EN={水:'Water',火:'Fire',木:'Wood',金:'Metal',土:'Earth'};
 const tabs=['Number Lab 号码分析','Star Tables 星表','Star Guide 星曜详解'];let cur=0;
 function nav(){document.getElementById('nav').innerHTML=tabs.map((t,i)=>`<button class="${i==cur?'on':''}" onclick="cur=${i};nav();R()">${i+1}. ${t}</button>`).join('')}
 function R(){info.style.display='none';[lab,tb,gd][cur]();scrollTo(0,0)}
 let QB='';
 const LS=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'[]');localStorage.setItem(k,JSON.stringify(v))}catch(e){return[]}};
+let EL=(()=>{const o=LS('nc_el');return o&&!Array.isArray(o)?{x:o.x||[],j:o.j||[]}:{x:[],j:[]}})();
 function tl(n){const ps=n.length>1?pairs(n).map(pr):[],c={};let h=0;ps.forEach(r=>{if(r.hid)h++;else c[r.s.z]=(c[r.s.z]||0)+1});
 const sum=g=>S.filter(s=>(s.r>0)==g).reduce((x,s)=>x+(c[s.z]||0),0);return{ps,c,h,good:sum(true),bad:sum(false)}}
 function tallyHTML(n){const t=tl(n);if(!t.ps.length)return '';
@@ -144,7 +168,7 @@ function lab(){
 v.innerHTML=`<div class="card"><h2>Key in any number <span class="z">输入任意号码</span></h2><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div><input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)" onchange="sv(this.value)"><div class="pairs" id="o"></div><div id="t1"></div></div>
 <div class="card"><h2>Compare with another number <span class="z">对比另一个号码</span></h2><div class="sb">Key in a second number to compare the two.<span class="zl">输入第二个号码，对比两者。</span></div><input id="q2" inputmode="numeric" placeholder="e.g. 91421358" value="${QB}" oninput="an2(this.value)" onchange="sv(this.value)"><div class="pairs" id="o2"></div><div id="t2"></div><div id="cmp"></div></div>
 <div class="card"><div class="sh"><h2>History <span class="z">历史记录</span></h2><button class="mb" onclick="clr()">Clear all 清除全部</button></div><div class="sb">Saved on this device when you tap away from the box. Load a number into A or B.<span class="zl">离开输入框时自动保存在本设备。可载入到 A 或 B。</span></div><div id="hist"></div></div>
-<div class="card"><h2>Digit elements <span class="z">数字五行</span></h2><div class="sb">Tap an element to see its digits.<span class="zl">点击五行，查看对应数字。</span></div><div class="leg">${[['水','1 · 6'],['火','2 · 7'],['木','3 · 8'],['金','4 · 9'],['土','5 · 0']].map(([e,d])=>`<div style="--e:var(${EC[e]})" onclick="say('${e} ${EN[e]}: digits 数字 ${d}')">${e}<em>${EN[e]}</em><span>${d}</span></div>`).join('')}</div></div>
+<div class="card" id="eld">${elHTML()}</div>
 <div class="card" id="spw"></div>
 <div class="card"><h2>The ladder <span class="z">星曜强弱</span></h2><div class="sb" style="margin:0">Order of strength within the stars 星的强弱顺序：<br><b>Auspicious / 吉星:</b> 伏位 &lt; 生气 &lt; 天医 &lt; 延年<br><b>Inauspicious / 凶星:</b> 六煞 &lt; 祸害 &lt; 五鬼 &lt; 绝命</div></div>`;
 an(QV);an2(QB);hist()}
@@ -168,9 +192,10 @@ const hid=ps.filter(r=>r.hid).length;
 document.getElementById('spw').innerHTML=`<h2>Star spectrum <span class="z">星曜光谱</span></h2><div class="sb">Weakest to strongest on each side. A badge shows how many pairs of your number land on that star${hid?` (plus ${hid} hidden 隐 pair${hid>1?'s':''})`:''}. Tap to explore.<span class="zl">每侧由弱到强。角标显示号码中落在该星的数字组数${hid?`（另有 ${hid} 组隐）`:''}。点击查看。</span></div>
 <div class="spec">${S.map(s=>`<button class="sp ${cnt[s.z]?'me':''}" style="--c:${s.col}" onclick="say('<b>${s.z}</b> ${s.en} · ${s.el} ${EN[s.el]}<br>${s.p.join(' · ')}')">${cnt[s.z]?`<span class="mk">${cnt[s.z]}</span>`:''}${s.z}<small>${s.r>0?'+'+s.r:s.r}</small></button>`).join('')}</div>
 <div class="axis"><span>◀ Most inauspicious 最凶</span><span>Most auspicious 最吉 ▶</span></div>`}
-function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<br>${s.en}</h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">Element 五行：${EN[s.el]} ${s.el}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}')">${x}</button>`).join('')}</div></div>`)}
+function col(g){return [...S].filter(s=>(s.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(s=>`<div class="card sc" style="--c:${s.col}"><div class="sh"><h3>${s.z}<br>${s.en}</h3><span class="tag">${s.r>0?'+'+s.r:s.r}</span></div><div class="sb" style="margin:2px 0 0">Element 五行：${EN[s.el]} ${s.el}</div><div class="g2">${s.p.map((x,i)=>`<button class="ch ${s.r>0?'ya':'ra'}${hl(x)}" onclick="say('<b>${x}</b> = ${s.z} (${s.en}), ${s.el} ${EN[s.el]}${hl(x).includes('fv')?' · contains 喜用 digit':''}${hl(x).includes('av')?' · contains 忌凶 digit':''}')">${x}</button>`).join('')}</div></div>`)}
 function tb(){
-v.innerHTML=`<div class="cols"><div class="ch2" style="background:#2f8f68">四吉星 Auspicious</div><div class="ch2" style="background:#c8503c">四凶星 Inauspicious</div>${(()=>{const A=col(true),B=col(false);return A.map((x,i)=>x+B[i]).join('')})()}</div><div class="note" style="color:var(--mut)">Strongest star first in each column.</div>`}
+const kb=(EL.x.length||EL.j.length)?`<div class="kb">${EL.x.length?`<span class="kr kx">喜用 ${EL.x.join(' ')}</span>`:''}${EL.j.length?`<span class="kr kj">忌凶 ${EL.j.join(' ')}</span>`:''}<br>Ringed pairs contain those elements' digits (green = favourable, red = unfavourable; red wins if a pair has both). 带圈数字组含有对应五行的数字。</div>`:`<div class="kb">Tip: set 喜用之神 / 忌凶之神 under Digit elements in tab 1 to highlight matching pairs here.</div>`;
+v.innerHTML=kb+`<div class="cols"><div class="ch2" style="background:#2f8f68">四吉星 Auspicious</div><div class="ch2" style="background:#c8503c">四凶星 Inauspicious</div>${(()=>{const A=col(true),B=col(false);return A.map((x,i)=>x+B[i]).join('')})()}</div><div class="note" style="color:var(--mut)">Strongest star first in each column.</div>`}
 const G={
 延年:{r:['Career, leadership and health','事业、领导力与健康'],s:['Strong professional ability; good at preserving wealth','专业能力强，善于守财'],w:['Stubborn, domineering, stressed and overworked','固执、强势、压力大、劳碌']},
 天医:{r:['Wealth, marriage and wisdom','财富、婚姻与智慧'],s:['Naturally kind; good regular income','天性善良，正财运佳'],w:['Innocent nature can make one gullible and easily deceived','单纯易轻信他人而被骗']},
