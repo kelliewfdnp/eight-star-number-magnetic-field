@@ -144,6 +144,55 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .pd::after{content:"";position:absolute;inset:0;border-radius:50%;background:#4cb583;animation:pdp 1.8s ease-out infinite}
 @keyframes pdp{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.9);opacity:0}}
 @media (prefers-reduced-motion:reduce){.pd::after{animation:none}}
+
+/* ===== 4th tab: BaZi Strength 八字强弱 (scoped to .bz) ===== */
+.bz .bbig{font-size:34px;font-weight:800;letter-spacing:2px;margin:4px 0 6px}
+.bz .hero .bsub{font-size:13px;opacity:.9}
+.bz .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.bz .pl{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center;min-width:0}
+.bz .pl .pn{font:700 12px "PingFang SC","Noto Sans SC",sans-serif;color:var(--mut);margin-bottom:8px}
+.bz .pl .pn small{display:block;font:600 10px Inter;opacity:.8}
+.bz .pl label{display:block;font:600 10.5px Inter;color:var(--mut);margin:6px 0 3px}
+.bz .pl select{width:100%;min-width:0;font:700 16px "PingFang SC","Noto Sans SC",sans-serif;padding:8px 0;border-radius:10px;border:1px solid var(--line);background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;color:var(--fg);text-align:center;text-align-last:center;-webkit-appearance:none;appearance:none}
+.bz .pl.dm .pn{color:var(--em)}
+.bz .bars{margin-top:12px;display:grid;gap:10px}
+.bz .barrow{display:grid;grid-template-columns:86px 1fr 52px;gap:10px;align-items:center}
+.bz .bnm{text-align:center;font:700 13px "PingFang SC","Noto Sans SC",sans-serif}.bz .bnm small{display:block;font:500 10.5px Inter;color:var(--mut)}
+.bz .bbar{height:14px;background:var(--soft);border-radius:8px;overflow:hidden}
+.bz .bbar i{display:block;height:100%;border-radius:8px}
+.bz .bsc{font:800 16px Inter;text-align:center}
+.bz .sup{color:var(--em)}.bz .drn{color:#c8503c}
+.bz .i-sup{background:var(--em2)}.bz .i-drn{background:#c8503c}
+.bz table.bzt{width:100%;border-collapse:collapse;font-size:13px}
+.bz table.bzt th{font:700 11.5px Inter;color:var(--mut);text-align:center;padding:6px;border-bottom:1px solid var(--line)}
+.bz table.bzt td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:center}
+.bz table.bzt tr:last-child td{border-bottom:0}
+.bz .elchip{display:inline-flex;align-items:center;gap:5px;border-radius:9px;padding:4px 9px;font:700 13px "PingFang SC","Noto Sans SC",sans-serif;background:var(--e);color:var(--fg)}
+.bz .rel{font:700 12px "PingFang SC","Noto Sans SC",sans-serif;border-radius:20px;padding:3px 10px;color:#fff;white-space:nowrap}
+.bz .r-sameMe{background:#5b6fd6}.bz .r-generateMe{background:#2f8f68}.bz .r-iGenerate{background:#b9741a}.bz .r-iControl{background:#dd7a3a}.bz .r-controlMe{background:#9b2c2c}
+.bz .leg em{font:800 15px "PingFang SC","Noto Sans SC",sans-serif;opacity:1;margin-top:2px}
+.bz .leg span{font:700 12px "PingFang SC","Noto Sans SC",sans-serif;margin-top:3px}
+.bz .brb{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:8px 0}
+.bz .fa{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;align-items:stretch}
+.bz .fa>div{padding:12px 8px;min-width:0}
+.bz .fa .fv{background:rgba(47,143,104,.16)}
+.bz .fa .uv{background:rgba(155,44,44,.13);border-left:1px solid var(--line)}
+.bz .fa h3{text-align:center;margin:0 0 8px;font:800 15px "PingFang SC","Noto Sans SC",sans-serif}
+.bz .fd{margin-top:12px;display:grid;gap:8px}
+.bz .fd>div{border-left:4px solid var(--c);padding:2px 0 2px 10px;font-size:12.5px;color:var(--mut);line-height:1.5}
+.bz .fd b{display:block;color:var(--fg);font-size:13px}
+.bz .bch{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-left:4px solid var(--rc,var(--line));background:var(--soft);color:var(--fg);border-radius:10px;padding:6px 10px;font:700 15px "PingFang SC","Noto Sans SC",sans-serif}
+.bz .bch small{font:600 10.5px "PingFang SC","Noto Sans SC",Inter,sans-serif;color:var(--mut)}
+.bz .wdesc{margin-top:12px;display:grid;gap:7px}
+.bz .wr{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--mut);line-height:1.4}
+.bz .wr i{flex:none;width:12px;height:12px;border-radius:4px;margin-top:3px;border:1px solid var(--line)}
+.bz .wr b{color:var(--fg)}
+.bz .l1{display:flex;align-items:center;justify-content:center;min-height:30px;line-height:1.2}
+.bz .bnote{font-size:12.5px;color:var(--mut);line-height:1.5}
+@media (max-width:640px){
+.bz .pillars{gap:6px}.bz .pl{padding:8px 5px}
+.bz table.bzt{font-size:12px}
+}
 </style></head><body>
 <header><div class="hin"><div class="lg"><div class="lh"><svg class="tj" viewBox="0 0 100 100" role="img" aria-label="太极"><circle cx="50" cy="50" r="48" fill="#fff" stroke="#000" stroke-width="2"/><path d="M50 2a48 48 0 0 1 0 96a24 24 0 0 1 0-48a24 24 0 0 0 0-48z" fill="#000"/><circle cx="50" cy="26" r="7" fill="#000"/><circle cx="50" cy="74" r="7" fill="#fff"/></svg></div><div class="lh"><div class="logo">数</div></div></div><div><h1>八星数字磁场：如何判断吉凶星</h1><div class="en2">Eight-Star Number Magnetic Field<br>How to Interpret Auspicious and Inauspicious Stars</div><div class="hs"><span id="clk"></span></div></div></div><nav id="nav"></nav></header>
 <main id="v"></main><div id="info"></div>
@@ -174,9 +223,9 @@ function elHTML(){return `<h2>Elemental numbers <span class="z">数字五行</sp
 <div class="sb" style="margin:14px 0 0"><b>Favorable Elements</b> (Green Outline) 喜用之神</div><div class="ft x">${ELS.map(e=>`<button class="${EL.x.includes(e)?'on':''}" onclick="setEL('x','${e}')">${e} ${EN[e]}</button>`).join('')}</div>
 <div class="sb" style="margin:0"><b>Unfavorable Elements</b> (Red Outline) 忌凶之神</div><div class="ft j">${ELS.map(e=>`<button class="${EL.j.includes(e)?'on':''}" onclick="setEL('j','${e}')">${e} ${EN[e]}</button>`).join('')}</div>`}
 const EN={水:'Water',火:'Fire',木:'Wood',金:'Metal',土:'Earth'};
-const tabs=['Number Lab 号码分析','Star Tables 星表','Star Guide 星曜详解'];let cur=0;
+const tabs=['Number Lab 号码分析','Star Tables 星表','Star Guide 星曜详解','BaZi Strength 八字强弱'];let cur=0;
 function nav(){document.getElementById('nav').innerHTML=tabs.map((t,i)=>`<button class="${i==cur?'on':''}" onclick="cur=${i};nav();R()">${i+1}. ${t}</button>`).join('')}
-function R(){info.style.display='none';[lab,tb,gd][cur]();scrollTo(0,0)}
+function R(){info.style.display='none';[lab,tb,gd,bazi][cur]();scrollTo(0,0)}
 let QB='';
 const LS=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'[]');localStorage.setItem(k,JSON.stringify(v))}catch(e){return[]}};
 let EL=(()=>{const o=LS('nc_el');return o&&!Array.isArray(o)?{x:o.x||[],j:o.j||[]}:{x:[],j:[]}})();
@@ -229,7 +278,202 @@ const G={
 function gd(){
 const grp=g=>[...S].filter(x=>(x.r>0)==g).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).map(x=>{const d=G[x.z];return `<div class="card sc g" style="--c:${x.col}"><div class="sh"><h3>${x.z}<br>${x.en}</h3><span class="tag">${x.r>0?'+'+x.r:x.r}</span></div><div class="sb" style="margin:3px 0 0">Element 五行：${EN[x.el]} ${x.el}</div>${[['r','Represents 代表','l-r'],['s','Strength 优点','l-s'],['w','Weakness 缺点','l-w']].map(([k,l,c])=>`<div class="gr"><span class="gl2 ${c}">${l}</span><div>${d[k][0]}</div><div>${d[k][1]}</div></div>`).join('')}</div>`}).join('');
 v.innerHTML=`<div class="sb" style="margin-bottom:10px">Core meaning and traits of each star.<span class="zl">每颗星的核心含义与特质。</span></div><div class="ch2" style="background:#2f8f68;margin-bottom:10px">四吉星 Auspicious Stars</div>${grp(true)}<div class="ch2" style="background:#c8503c;margin:4px 0 10px">四凶星 Inauspicious Stars</div>${grp(false)}`}
-const v=document.getElementById('v');nav();R();
+const v=document.getElementById('v');
+/* ===== 4. BaZi Strength 八字强弱 (self-contained; own scope) ===== */
+(function(){
+const STEMS={
+ 甲:{el:'木',yang:1},乙:{el:'木',yang:0},丙:{el:'火',yang:1},丁:{el:'火',yang:0},
+ 戊:{el:'土',yang:1},己:{el:'土',yang:0},庚:{el:'金',yang:1},辛:{el:'金',yang:0},
+ 壬:{el:'水',yang:1},癸:{el:'水',yang:0}
+};
+// 地支：本气 main + 藏干 hidden stems
+const BRANCHES={
+ 寅:{el:'木',hid:['甲','丙','戊']},卯:{el:'木',hid:['乙']},
+ 辰:{el:'土',hid:['戊','乙','癸']},巳:{el:'火',hid:['丙','庚','戊']},
+ 午:{el:'火',hid:['丁','己']},未:{el:'土',hid:['己','丁','乙']},
+ 申:{el:'金',hid:['庚','壬','戊']},酉:{el:'金',hid:['辛']},
+ 戌:{el:'土',hid:['戊','辛','丁']},亥:{el:'水',hid:['壬','甲']},
+ 子:{el:'水',hid:['癸']},丑:{el:'土',hid:['己','癸','辛']}
+};
+const ELS=['水','火','木','金','土'];
+const EN={水:'Water',火:'Fire',木:'Wood',金:'Metal',土:'Earth'};
+const EC={水:'--W',火:'--F',木:'--M',金:'--J',土:'--T'};
+
+// 相生 A -> B ; 相克 A -> B
+const GEN={木:'火',火:'土',土:'金',金:'水',水:'木'};
+const CON={木:'土',土:'水',水:'火',火:'金',金:'木'};
+const gen=(a,b)=>GEN[a]===b, con=(a,b)=>CON[a]===b;
+
+// 位置权重（日元不计分，其余合计 100）
+const WEIGHT={ys:8,yb:4,ms:12,mb:40,db:12,hs:12,hb:12};
+
+// 十神关系（相对日主）
+const REL={
+ sameMe:{zh:'同我',en:'Peer 比肩·劫财',sup:true},
+ generateMe:{zh:'生我',en:'Resource 正印·偏印',sup:true},
+ iGenerate:{zh:'我生',en:'Output 食神·伤官',sup:false},
+ iControl:{zh:'我克',en:'Wealth 正财·偏财',sup:false},
+ controlMe:{zh:'克我',en:'Power 正官·七杀',sup:false}
+};
+function relOf(dmEl,el){
+  if(el===dmEl)return 'sameMe';
+  if(gen(el,dmEl))return 'generateMe';
+  if(gen(dmEl,el))return 'iGenerate';
+  if(con(dmEl,el))return 'iControl';
+  if(con(el,dmEl))return 'controlMe';
+}
+// 具体十神名（含阴阳）
+function tenGod(dm,stem){
+  const d=STEMS[dm],t=STEMS[stem],r=relOf(d.el,t.el);
+  const same=d.yang===t.yang;
+  const map={sameMe:same?'比肩':'劫财',generateMe:same?'偏印':'正印',
+    iGenerate:same?'食神':'伤官',iControl:same?'偏财':'正财',controlMe:same?'七杀':'正官'};
+  return map[r];
+}
+
+// 旺相休囚死 表（月令五行 -> 各状态对应五行）
+const WXQS={
+ 木:{wang:'木',xiang:'火',xiu:'水',qiu:'金',si:'土'},
+ 火:{wang:'火',xiang:'土',xiu:'木',qiu:'水',si:'金'},
+ 金:{wang:'金',xiang:'水',xiu:'土',qiu:'火',si:'木'},
+ 水:{wang:'水',xiang:'木',xiu:'金',qiu:'土',si:'火'},
+ 土:{wang:'土',xiang:'金',xiu:'火',qiu:'木',si:'水'}
+};
+const STATUS={
+ wang:{zh:'旺',en:'Prosperous',tr:'快涨 Fast rise'},
+ xiang:{zh:'相',en:'Assisted',tr:'慢涨 Slow rise'},
+ xiu:{zh:'休',en:'Resting',tr:'横盘 Sideways'},
+ qiu:{zh:'囚',en:'Trapped',tr:'慢跌 Slow fall'},
+ si:{zh:'死',en:'Exhausted',tr:'快跌 Fast fall'}
+};
+function wxqsOf(seasonEl,el){
+  const row=WXQS[seasonEl];
+  for(const k in row) if(row[k]===el) return k;
+}
+
+let S={ys:'己',yb:'丑',ms:'甲',mb:'戌',ds:'丁',db:'未',hs:'庚',hb:'子'};
+function compute(){
+  const dm=S.ds, dmEl=STEMS[dm].el;
+  const positions=[
+    {k:'ys',label:'年干',en:'Year Stem',ch:S.ys,el:STEMS[S.ys].el,w:WEIGHT.ys},
+    {k:'yb',label:'年支',en:'Year Branch',ch:S.yb,el:BRANCHES[S.yb].el,w:WEIGHT.yb},
+    {k:'ms',label:'月干',en:'Month Stem',ch:S.ms,el:STEMS[S.ms].el,w:WEIGHT.ms},
+    {k:'mb',label:'月令',en:'Month Branch',ch:S.mb,el:BRANCHES[S.mb].el,w:WEIGHT.mb},
+    {k:'db',label:'日支',en:'Day Branch',ch:S.db,el:BRANCHES[S.db].el,w:WEIGHT.db},
+    {k:'hs',label:'时干',en:'Hour Stem',ch:S.hs,el:STEMS[S.hs].el,w:WEIGHT.hs},
+    {k:'hb',label:'时支',en:'Hour Branch',ch:S.hb,el:BRANCHES[S.hb].el,w:WEIGHT.hb}
+  ];
+  let sup=0,drn=0;
+  positions.forEach(p=>{
+    p.rel=relOf(dmEl,p.el);
+    const mainStem=BRANCHES[p.ch]?BRANCHES[p.ch].hid[0]:p.ch; // 地支取本气藏干
+    p.ten=tenGod(dm,mainStem);
+    if(REL[p.rel].sup)sup+=p.w; else drn+=p.w;
+  });
+  const strong=sup>drn;
+  const seasonEl=BRANCHES[S.mb].el;
+  // 各关系对应的五行（用于喜用/忌神展示）
+  const relEls={sameMe:[dmEl],generateMe:[Object.keys(GEN).find(x=>GEN[x]===dmEl)],
+    iGenerate:[GEN[dmEl]],iControl:[CON[dmEl]],controlMe:[Object.keys(CON).find(x=>CON[x]===dmEl)]};
+  return {dm,dmEl,positions,sup,drn,strong,seasonEl,relEls};
+}
+
+function opt(list,cur){return list.map(c=>`<option ${c===cur?'selected':''}>${c}</option>`).join('')}
+
+function pillar(sk,bk,label,en,isDay){
+  const stemSel=`<label>${isDay?'日元 Day Master':'干 Stem'}</label><select onchange="bzUpd('${sk}',this.value)">${opt(Object.keys(STEMS),S[sk])}</select>`;
+  const brSel=`<label>支 Branch</label><select onchange="bzUpd('${bk}',this.value)">${opt(Object.keys(BRANCHES),S[bk])}</select>`;
+  return `<div class="pl ${isDay?'dm':''}"><div class="pn">${label}<small>${en}</small></div>${stemSel}${brSel}</div>`;
+}
+
+function baziHTML(){
+  const r=compute();
+  const total=r.sup+r.drn;
+  const supPct=Math.round(r.sup/total*100), drnPct=100-supPct;
+
+  // 四柱选择区
+  const pillars=`<div class="card"><h2>Enter your four pillars <span class="z">输入四柱</span></h2>
+    <div class="sb">Pick the stem and branch of each pillar. The Day Stem (日元) is the reference and is not scored.<span class="zl">选择每柱的天干与地支；日元仅作参照，不计入分数。</span></div>
+    <div class="pillars">
+      ${pillar('ys','yb','年柱','Year')}
+      ${pillar('ms','mb','月柱','Month')}
+      ${pillar('ds','db','日柱','Day',true)}
+      ${pillar('hs','hb','时柱','Hour')}
+    </div></div>`;
+
+  // 强弱结论
+  const verdict=`<div class="card hero"><div class="bd">Day Master 日主 · ${r.dm}${r.dmEl} ${EN[r.dmEl]}</div>
+    <div class="bbig">${r.strong?'身强':'身弱'}</div>
+    <div class="bsub">${r.strong?'Strong Day Master — needs draining / control 需克制消耗':'Weak Day Master — needs support / backing 需帮扶'}</div></div>`;
+
+  // 分数条
+  const bars=`<div class="card"><h2>Strength score <span class="z">强弱打分</span></h2>
+    <div class="sb">Support 同我 + 生我 vs Drain 我生 + 我克 + 克我. Total 100 (Day Stem excluded).<span class="zl">帮扶（同我、生我）对比 消耗（我生、我克、克我）；满分 100，日元不计分。</span></div>
+    <div class="bars">
+      <div class="barrow"><div class="bnm sup">帮扶 Support<small>同我 · 生我</small></div><div class="bbar"><i class="i-sup" style="width:${supPct}%"></i></div><div class="bsc sup">${r.sup}</div></div>
+      <div class="barrow"><div class="bnm drn">消耗 Drain<small>我生 · 我克 · 克我</small></div><div class="bbar"><i class="i-drn" style="width:${drnPct}%"></i></div><div class="bsc drn">${r.drn}</div></div>
+    </div></div>`;
+
+  // 明细表
+  const rows=r.positions.map(p=>{
+    const hid=BRANCHES[p.ch]?BRANCHES[p.ch].hid.map(h=>`<div style="margin-top:3px;font-size:11px;color:var(--mut)">${h} · ${tenGod(r.dm,h)}</div>`).join(''):'';
+    return `<tr>
+      <td><div class="l1"><b>${p.label}</b></div><small style="color:var(--mut)">${p.en}</small></td>
+      <td><div class="l1"><span class="elchip" style="--e:var(${EC[p.el]})">${p.ch} ${p.el}</span></div>${hid}</td>
+      <td><div class="l1"><span class="rel r-${p.rel}">${REL[p.rel].zh}</span></div><small style="color:var(--mut)">${p.ten}</small></td>
+      <td style="text-align:center;font-weight:700"><div class="l1" style="justify-content:center">${p.w}</div></td>
+      <td style="text-align:center" class="${REL[p.rel].sup?'sup':'drn'}"><div class="l1" style="justify-content:center">${REL[p.rel].sup?'+ 帮扶':'− 消耗'}</div></td>
+    </tr>`;
+  }).join('');
+  const detail=`<div class="card"><h2>Breakdown <span class="z">逐项明细</span></h2>
+    <div class="sb">Each position's element, ten-god relation and weight. Branch hidden stems (藏干) are listed for reference.<span class="zl">各位置五行、十神关系与权重；地支藏干仅供参考。</span></div>
+    <table class="bzt"><thead><tr><th>位置</th><th>干支 · 五行</th><th>关系 · 十神</th><th style="text-align:center">权重</th><th style="text-align:center">归类</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+
+  // 旺相休囚死
+  const ORDER=['wang','xiang','xiu','qiu','si'];
+  const sp=t=>{const k=t.indexOf(' ');return [t.slice(0,k),t.slice(k+1)]};
+  const wx=ORDER.map(k=>{
+    const el=WXQS[r.seasonEl][k],sd=STATUS[k],[tz]=sp(sd.tr);
+    return `<div style="--e:var(${EC[el]})"><b class="wm">${sd.zh}</b>${el}<em>${sd.zh}</em><span>${tz}</span></div>`;
+  }).join('');
+  const wdesc=ORDER.map(k=>{
+    const el=WXQS[r.seasonEl][k],sd=STATUS[k],[tz,te]=sp(sd.tr);
+    return `<div class="wr"><i style="background:var(${EC[el]})"></i><span><b>${el} ${EN[el]}</b> · ${sd.zh} ${sd.en} — ${tz} ${te}</span></div>`;
+  }).join('');
+  const wxqs=`<div class="card"><h2>Seasonal status <span class="z">旺相休囚死</span></h2>
+    <div class="sb">Season = Month Branch (月令) ${S.mb} · ${r.seasonEl} ${EN[r.seasonEl]}. Ordered 旺 → 相 → 休 → 囚 → 死.<span class="zl">以月令五行定四季，按 旺 → 相 → 休 → 囚 → 死 排列。</span></div>
+    <div class="leg">${wx}</div><div class="wdesc">${wdesc}</div></div>`;
+
+  // 喜用 / 忌神
+  const favRel=r.strong?['iGenerate','iControl','controlMe']:['sameMe','generateMe'];
+  const avRel=r.strong?['sameMe','generateMe']:['iGenerate','iControl','controlMe'];
+  const rn=rel=>{const t=REL[rel].en,k=t.indexOf(' ');return {en:t.slice(0,k),cn:t.slice(k+1)}};
+  const relChip=rel=>`<span class="bch" style="--rc:var(--line)">${REL[rel].zh}<small>${rn(rel).cn}</small></span>`;
+  const elChip=el=>`<span class="elchip" style="--e:var(${EC[el]})">${el}</span>`;
+  const relBlock=rels=>rels.map(rel=>`<div class="brb">${relChip(rel)}${r.relEls[rel].map(elChip).join('')}</div>`).join('');
+  const descLine=rels=>rels.map(rel=>`<div>${rn(rel).en} ${REL[rel].zh} → ${r.relEls[rel].map(e=>EN[e]+' '+e).join(', ')}</div>`).join('');
+  const favav=`<div class="card"><h2>Favorable &amp; Unfavorable <span class="z">喜用 · 忌凶</span></h2>
+    <div class="fa">
+      <div class="fv"><h3>喜用之神</h3>${relBlock(favRel)}</div>
+      <div class="uv"><h3>忌凶之神</h3>${relBlock(avRel)}</div>
+    </div>
+    <div class="fd">
+      <div style="--c:var(--fvr)"><b>Favorable 喜用</b>${descLine(favRel)}</div>
+      <div style="--c:var(--avr)"><b>Unfavorable 忌凶</b>${descLine(avRel)}</div>
+    </div></div>`;
+
+  const note=`<div class="card"><div class="bnote">
+    <b>Note 说明：</b>This implements the simplified fixed-weight teaching method from the reference lecture. The Day Stem (日元) is the reference point and carries no score; the remaining positions total 100 points. Branch scoring uses its main qi (本气); hidden stems are shown for reference. Classical Zi-Ping BaZi additionally considers combinations, clashes, and hidden-stem priority, which this quick self-check does not model. For cultural reference only.
+    <span class="zl">本工具采用参考课程中的简化固定打分法：日元为参照不计分，其余位置合计 100 分；地支以本气计分，藏干仅供参考。传统子平八字还需论合冲、藏干主次等，本速查未纳入，仅供文化参考。</span></div></div>`;
+
+  return `<div class="bz">${pillars+verdict+bars+detail+wxqs+favav+note}</div>`;
+}
+
+window.bzUpd=function(k,val){S[k]=val;bazi()};
+window.bazi=function(){v.innerHTML=baziHTML()};
+})();
+nav();R();
 function tick(){const d=new Date();document.getElementById('clk').textContent=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' ('+d.toLocaleDateString('zh-CN',{weekday:'short'})+') · '+d.toLocaleTimeString('en-GB')}
 tick();setInterval(tick,1000);
 </script></body></html>
