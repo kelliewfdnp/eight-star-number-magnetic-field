@@ -154,7 +154,8 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .pl .pn small{display:block;font:600 10px Inter;opacity:.8}
 .bz .pl label{display:block;font:600 10.5px Inter;color:var(--mut);margin:6px 0 3px}
 .bz .pl select{width:100%;min-width:0;font:700 16px "PingFang SC","Noto Sans SC",sans-serif;padding:8px 0;border-radius:10px;border:1px solid var(--line);background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;color:var(--fg);text-align:center;text-align-last:center;-webkit-appearance:none;appearance:none}
-.bz .pl.dm .pn{color:var(--em)}
+.bz .pl.dm .pn,.bz .pl.dm label:first-of-type{color:var(--em)}
+.bz .pl label{white-space:nowrap}
 .bz .bars{margin-top:12px;display:grid;gap:10px}
 .bz .barrow{display:grid;grid-template-columns:86px 1fr 52px;gap:10px;align-items:center}
 .bz .bnm{text-align:center;font:700 13px "PingFang SC","Noto Sans SC",sans-serif}.bz .bnm small{display:block;font:500 10.5px Inter;color:var(--mut)}
@@ -169,6 +170,8 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz table.bzt tr:last-child td{border-bottom:0}
 .bz .elchip{display:inline-flex;align-items:center;gap:5px;border-radius:9px;padding:4px 9px;font:700 13px "PingFang SC","Noto Sans SC",sans-serif;background:var(--e);color:var(--fg)}
 .bz .rel{font:700 12px "PingFang SC","Noto Sans SC",sans-serif;border-radius:20px;padding:3px 10px;color:#fff;white-space:nowrap}
+.bz .r-dm{background:#64748b}
+.bz tr.dmrow td{background:rgba(47,143,104,.08)}
 .bz .r-sameMe{background:#5b6fd6}.bz .r-generateMe{background:#2f8f68}.bz .r-iGenerate{background:#b9741a}.bz .r-iControl{background:#dd7a3a}.bz .r-controlMe{background:#9b2c2c}
 .bz .leg em{font:800 15px "PingFang SC","Noto Sans SC",sans-serif;opacity:1;margin-top:2px}
 .bz .leg span{font:700 12px "PingFang SC","Noto Sans SC",sans-serif;margin-top:3px}
@@ -381,7 +384,7 @@ function compute(){
 function opt(list,cur){return list.map(c=>`<option ${c===cur?'selected':''}>${c}</option>`).join('')}
 
 function pillar(sk,bk,label,en,isDay){
-  const stemSel=`<label>${isDay?'日元 Day Master':'干 Stem'}</label><select onchange="bzUpd('${sk}',this.value)">${opt(Object.keys(STEMS),S[sk])}</select>`;
+  const stemSel=`<label>${isDay?'日元':'干 Stem'}</label><select onchange="bzUpd('${sk}',this.value)">${opt(Object.keys(STEMS),S[sk])}</select>`;
   const brSel=`<label>支 Branch</label><select onchange="bzUpd('${bk}',this.value)">${opt(Object.keys(BRANCHES),S[bk])}</select>`;
   return `<div class="pl ${isDay?'dm':''}"><div class="pn">${label}<small>${en}</small></div>${stemSel}${brSel}</div>`;
 }
@@ -415,7 +418,7 @@ function baziHTML(){
     </div></div>`;
 
   // 明细表
-  const rows=r.positions.map(p=>{
+  const rowsA=r.positions.map(p=>{
     const hid=BRANCHES[p.ch]?BRANCHES[p.ch].hid.map(h=>`<div style="margin-top:3px;font-size:11px;color:var(--mut)">${h} · ${tenGod(r.dm,h)}</div>`).join(''):'';
     return `<tr>
       <td><div class="l1"><b>${p.label}</b></div><small style="color:var(--mut)">${p.en}</small></td>
@@ -424,9 +427,18 @@ function baziHTML(){
       <td style="text-align:center;font-weight:700"><div class="l1" style="justify-content:center">${p.w}</div></td>
       <td style="text-align:center" class="${REL[p.rel].sup?'sup':'drn'}"><div class="l1" style="justify-content:center">${REL[p.rel].sup?'+ 帮扶':'− 消耗'}</div></td>
     </tr>`;
-  }).join('');
+  });
+  // 日元 (Day Master): shown for reference, not scored — sits between 月令 and 日支
+  rowsA.splice(4,0,`<tr class="dmrow">
+      <td><div class="l1"><b>日元</b></div><small style="color:var(--mut)">Day Master</small></td>
+      <td><div class="l1"><span class="elchip" style="--e:var(${EC[r.dmEl]})">${r.dm} ${r.dmEl}</span></div></td>
+      <td><div class="l1"><span class="rel r-dm">日元</span></div><small style="color:var(--mut)">自己 Self</small></td>
+      <td style="text-align:center;font-weight:700"><div class="l1" style="justify-content:center;color:var(--mut)">—</div></td>
+      <td style="text-align:center;color:var(--mut)"><div class="l1" style="justify-content:center">参照 不计分</div></td>
+    </tr>`);
+  const rows=rowsA.join('');
   const detail=`<div class="card"><h2>Breakdown <span class="z">逐项明细</span></h2>
-    <div class="sb">Each position's element, ten-god relation and weight. Branch hidden stems (藏干) are listed for reference.<span class="zl">各位置五行、十神关系与权重；地支藏干仅供参考。</span></div>
+    <div class="sb">Each position's element, ten-god relation and weight. The Day Master (日元) row is the reference point and is not scored. Branch hidden stems (藏干) are listed for reference.<span class="zl">各位置五行、十神关系与权重；地支藏干仅供参考。</span></div>
     <table class="bzt"><thead><tr><th>位置</th><th>干支 · 五行</th><th>关系 · 十神</th><th style="text-align:center">权重</th><th style="text-align:center">归类</th></tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 
