@@ -154,11 +154,32 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .pl .pn small{display:block;font:600 10px Inter;opacity:.8}
 .bz .pl label{display:block;font:600 10.5px Inter;color:var(--mut);margin:6px 0 3px}
 .bz .pl select{width:100%;min-width:0;font:700 16px "PingFang SC","Noto Sans SC",sans-serif;padding:8px 0;border-radius:10px;border:1px solid var(--line);background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;color:var(--fg);text-align:center;text-align-last:center;-webkit-appearance:none;appearance:none}
+.bz .pl.dm{background:color-mix(in srgb,#2f8f68 20%,var(--soft))}
+.bz tr.dmrow td{background:color-mix(in srgb,#2f8f68 18%,var(--card))}
+.bz .bexp{margin-top:10px;font-size:14px;line-height:1.5;text-align:center;color:var(--fg);opacity:.85}
+.bz .tg-s{color:var(--fvr)}.bz .tg-d{color:var(--avr)}
+.bz .bzi{background:none;border:0;padding:0 0 0 8px;font-size:18px;line-height:1;color:var(--em);cursor:pointer;vertical-align:middle}
+.bzm{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.5)}
+.bzm .bzb{position:relative;width:100%;max-width:400px;max-height:85vh;overflow:auto;background:var(--card);color:var(--fg);border-radius:12px;padding:24px}
+.bzm h3{margin:0 28px 14px 0;font-size:17px;color:var(--em)}
+.bzm ul{margin:0;padding:0;list-style:none}.bzm li{margin-bottom:12px;font-size:14px;line-height:1.5}
+.bzm .bzx{position:absolute;top:12px;right:12px;width:30px;height:30px;border:0;border-radius:50%;background:var(--soft);color:var(--fg);font-size:14px;cursor:pointer}
+.bz .sdp{display:inline-block;font-weight:700;border-radius:8px;padding:2px 9px;margin:2px 0}
+.bz .sdp.sup{background:rgba(47,143,104,.15)}.bz .sdp.drn{background:rgba(200,80,60,.14)}
+.bz .sdv{margin:0 8px;color:var(--mut);font-weight:600}
+.bz .fd{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.bz .fd>div{border-left:4px solid var(--c);padding:2px 0 2px 10px;font-size:12.5px;color:var(--mut);line-height:1.45;min-width:0}
+.bz .fd h4{margin:0 0 6px;color:var(--fg);font-size:13px}
+.bz .fi{margin-bottom:8px}.bz .fi b{display:block;color:var(--fg)}.bz .fi small{display:block;font-size:11px;opacity:.85}
+.bz .hero.bzh{--k:62%;background:color-mix(in srgb,var(--e) var(--k),var(--card));color:var(--fg);border:1px solid var(--line);position:relative;overflow:hidden}
+.bz .hero.bzh.str{--k:100%}
+.bz .hero.bzh::after{content:attr(data-el);position:absolute;right:8px;bottom:-22px;font:800 130px "PingFang SC","Noto Sans SC",sans-serif;opacity:.12;line-height:1;pointer-events:none}
+.bz .hero.bzh .bd,.bz .hero.bzh .bsub{color:var(--fg)}
 .bz .pl.dm .pn,.bz .pl.dm label:first-of-type{color:var(--em)}
 .bz .pl label{white-space:nowrap}
 .bz .bars{margin-top:12px;display:grid;gap:10px}
 .bz .barrow{display:grid;grid-template-columns:86px 1fr 52px;gap:10px;align-items:center}
-.bz .bnm{text-align:center;font:700 13px "PingFang SC","Noto Sans SC",sans-serif}.bz .bnm small{display:block;font:500 10.5px Inter;color:var(--mut)}
+.bz .bnm{text-align:left;font:700 13px "PingFang SC","Noto Sans SC",sans-serif}.bz .bnm small{display:block;font:500 10.5px Inter;color:var(--mut)}
 .bz .bbar{height:14px;background:var(--soft);border-radius:8px;overflow:hidden}
 .bz .bbar i{display:block;height:100%;border-radius:8px}
 .bz .bsc{font:800 16px Inter;text-align:center}
@@ -171,19 +192,16 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .elchip{display:inline-flex;align-items:center;gap:5px;border-radius:9px;padding:4px 9px;font:700 13px "PingFang SC","Noto Sans SC",sans-serif;background:var(--e);color:var(--fg)}
 .bz .rel{font:700 12px "PingFang SC","Noto Sans SC",sans-serif;border-radius:20px;padding:3px 10px;color:#fff;white-space:nowrap}
 .bz .r-dm{background:#64748b}
-.bz tr.dmrow td{background:rgba(47,143,104,.08)}
 .bz .r-sameMe{background:#5b6fd6}.bz .r-generateMe{background:#2f8f68}.bz .r-iGenerate{background:#b9741a}.bz .r-iControl{background:#dd7a3a}.bz .r-controlMe{background:#9b2c2c}
 .bz .leg em{font:800 15px "PingFang SC","Noto Sans SC",sans-serif;opacity:1;margin-top:2px}
 .bz .leg span{font:700 12px "PingFang SC","Noto Sans SC",sans-serif;margin-top:3px}
 .bz .brb{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:8px 0}
 .bz .fa{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;align-items:stretch}
 .bz .fa>div{padding:12px 8px;min-width:0}
-.bz .fa .fv{background:rgba(47,143,104,.16)}
-.bz .fa .uv{background:rgba(155,44,44,.13);border-left:1px solid var(--line)}
+.bz .fa{margin-top:14px}
+.bz .fa .fv{background:color-mix(in srgb,#2f8f68 26%,transparent);box-shadow:inset 0 0 0 1.5px #2f8f68}
+.bz .fa .uv{background:color-mix(in srgb,#c8503c 26%,transparent);box-shadow:inset 0 0 0 1.5px #c8503c}
 .bz .fa h3{text-align:center;margin:0 0 8px;font:800 15px "PingFang SC","Noto Sans SC",sans-serif}
-.bz .fd{margin-top:12px;display:grid;gap:8px}
-.bz .fd>div{border-left:4px solid var(--c);padding:2px 0 2px 10px;font-size:12.5px;color:var(--mut);line-height:1.5}
-.bz .fd b{display:block;color:var(--fg);font-size:13px}
 .bz .bch{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-left:4px solid var(--rc,var(--line));background:var(--soft);color:var(--fg);border-radius:10px;padding:6px 10px;font:700 15px "PingFang SC","Noto Sans SC",sans-serif}
 .bz .bch small{font:600 10.5px "PingFang SC","Noto Sans SC",Inter,sans-serif;color:var(--mut)}
 .bz .wdesc{margin-top:12px;display:grid;gap:7px}
@@ -405,13 +423,14 @@ function baziHTML(){
     </div></div>`;
 
   // 强弱结论
-  const verdict=`<div class="card hero"><div class="bd">Day Master 日主 · ${r.dm}${r.dmEl} ${EN[r.dmEl]}</div>
+  const verdict=`<div class="card hero bzh ${r.strong?'str':'wk'}" data-el="${r.dmEl}" style="--e:var(${EC[r.dmEl]})"><div class="bd">Day Master 日主 · ${r.dm}${r.dmEl} ${EN[r.dmEl]}</div>
     <div class="bbig">${r.strong?'身强':'身弱'}</div>
-    <div class="bsub">${r.strong?'Strong Day Master — needs draining / control 需克制消耗':'Weak Day Master — needs support / backing 需帮扶'}</div></div>`;
+    <div class="bsub">${r.strong?'Strong Day Master — needs draining / control 需克制消耗':'Weak Day Master — needs support / backing 需帮扶'}</div>
+    <div class="bexp">${r.strong?'This chart is Strong (身强). Output, Wealth &amp; Power are your <b class="tg-s">[+ Balance]</b> elements, while Peer &amp; Resource are your <b class="tg-d">[- Overload]</b> elements.':'This chart is Weak (身弱). Peer &amp; Resource are your <b class="tg-s">[+ Support]</b> elements, while Output, Wealth &amp; Power are your <b class="tg-d">[- Drain]</b> elements.'}</div></div>`;
 
   // 分数条
-  const bars=`<div class="card"><h2>Strength score <span class="z">强弱打分</span></h2>
-    <div class="sb">Support 同我 + 生我 vs Drain 我生 + 我克 + 克我. Total 100 (Day Stem excluded).<span class="zl">帮扶（同我、生我）对比 消耗（我生、我克、克我）；满分 100，日元不计分。</span></div>
+  const bars=`<div class="card"><h2>Strength score <span class="z">强弱打分</span><button class="bzi" onclick="bzInfo()" aria-label="Info">ⓘ</button></h2>
+    <div class="sb">Support vs Drain → Total 100 points<span class="zl"><span class="sdp sup">帮扶 同我 · 生我</span><span class="sdv">vs</span><span class="sdp drn">消耗 我生 · 我克 · 克我</span></span><span class="zl">满分 100 点 · 日元不计分</span></div>
     <div class="bars">
       <div class="barrow"><div class="bnm sup">帮扶 Support<small>同我 · 生我</small></div><div class="bbar"><i class="i-sup" style="width:${supPct}%"></i></div><div class="bsc sup">${r.sup}</div></div>
       <div class="barrow"><div class="bnm drn">消耗 Drain<small>我生 · 我克 · 克我</small></div><div class="bbar"><i class="i-drn" style="width:${drnPct}%"></i></div><div class="bsc drn">${r.drn}</div></div>
@@ -438,7 +457,7 @@ function baziHTML(){
     </tr>`);
   const rows=rowsA.join('');
   const detail=`<div class="card"><h2>Breakdown <span class="z">逐项明细</span></h2>
-    <div class="sb">Each position's element, ten-god relation and weight. The Day Master (日元) row is the reference point and is not scored. Branch hidden stems (藏干) are listed for reference.<span class="zl">各位置五行、十神关系与权重；地支藏干仅供参考。</span></div>
+    <div class="sb">Each position's element, Ten-Gods relation, and weight. The Day Master (日元) row is the reference point and is not scored. Branch hidden stems (藏干) are listed for reference.<span class="zl">各位置五行、十神关系与权重；地支藏干仅供参考。</span></div>
     <table class="bzt"><thead><tr><th>位置</th><th>干支 · 五行</th><th>关系 · 十神</th><th style="text-align:center">权重</th><th style="text-align:center">归类</th></tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 
@@ -464,24 +483,39 @@ function baziHTML(){
   const relChip=rel=>`<span class="bch" style="--rc:var(--line)">${REL[rel].zh}<small>${rn(rel).cn}</small></span>`;
   const elChip=el=>`<span class="elchip" style="--e:var(${EC[el]})">${el}</span>`;
   const relBlock=rels=>rels.map(rel=>`<div class="brb">${relChip(rel)}${r.relEls[rel].map(elChip).join('')}</div>`).join('');
-  const descLine=rels=>rels.map(rel=>`<div>${rn(rel).en} ${REL[rel].zh} → ${r.relEls[rel].map(e=>EN[e]+' '+e).join(', ')}</div>`).join('');
+  const RN={sameMe:'Peer (Companion)',generateMe:'Resource (Support)',iGenerate:'Output (Expression)',iControl:'Wealth (Possession)',controlMe:'Power (Authority)'};
+  const TG={sameMe:'Friend / Rob Wealth',generateMe:'Direct / Indirect Resource',iGenerate:'Eating God / Hurting Officer',iControl:'Direct / Indirect Wealth',controlMe:'Direct Officer / Seven Killings'};
+  const descLine=rels=>rels.map(rel=>`<div class="fi"><b>${RN[rel]} ${REL[rel].zh}</b><small>${TG[rel]}</small>→ ${r.relEls[rel].map(e=>EN[e]+' '+e).join(', ')}</div>`).join('');
   const favav=`<div class="card"><h2>Favorable &amp; Unfavorable <span class="z">喜用 · 忌凶</span></h2>
     <div class="fa">
       <div class="fv"><h3>喜用之神</h3>${relBlock(favRel)}</div>
       <div class="uv"><h3>忌凶之神</h3>${relBlock(avRel)}</div>
     </div>
     <div class="fd">
-      <div style="--c:var(--fvr)"><b>Favorable 喜用</b>${descLine(favRel)}</div>
-      <div style="--c:var(--avr)"><b>Unfavorable 忌凶</b>${descLine(avRel)}</div>
+      <div style="--c:var(--fvr)"><h4>Favorable 喜用</h4>${descLine(favRel)}</div>
+      <div style="--c:var(--avr)"><h4>Unfavorable 忌凶</h4>${descLine(avRel)}</div>
     </div></div>`;
 
   const note=`<div class="card"><div class="bnote">
-    <b>Note 说明：</b>This implements the simplified fixed-weight teaching method from the reference lecture. The Day Stem (日元) is the reference point and carries no score; the remaining positions total 100 points. Branch scoring uses its main qi (本气); hidden stems are shown for reference. Classical Zi-Ping BaZi additionally considers combinations, clashes, and hidden-stem priority, which this quick self-check does not model. For cultural reference only.
+    <b>Note 说明：</b>This implements the simplified fixed-weight teaching method from the reference lecture. The Day Stem (日元) is the reference point and carries no score; the remaining positions total 100 points. Branch scoring uses its main qi (本气); hidden stems are shown for reference. Classical Zi Ping BaZi additionally considers combinations, clashes, and hidden-stem priority, which this quick self-check does not model. For cultural reference only.
     <span class="zl">本工具采用参考课程中的简化固定打分法：日元为参照不计分，其余位置合计 100 分；地支以本气计分，藏干仅供参考。传统子平八字还需论合冲、藏干主次等，本速查未纳入，仅供文化参考。</span></div></div>`;
 
   return `<div class="bz">${pillars+verdict+bars+detail+wxqs+favav+note}</div>`;
 }
 
+window.bzInfo=function(){
+  const m=document.createElement('div');m.className='bzm';
+  m.innerHTML=`<div class="bzb"><button class="bzx" aria-label="Close">✕</button><h3>The 5 Relationships (十神)</h3><ul>
+  <li><b>Peer 同我:</b> Companions, siblings, and self-confidence.</li>
+  <li><b>Resource 生我:</b> Support, mentors, education, and nourishment.</li>
+  <li><b>Output 我生:</b> Self-expression, creativity, and communication.</li>
+  <li><b>Wealth 我克:</b> Finances, assets, and management of resources.</li>
+  <li><b>Power 克我:</b> Authority, career, discipline, and boundaries.</li></ul></div>`;
+  const close=()=>{m.remove();document.removeEventListener('keydown',esc)};
+  const esc=e=>{if(e.key==='Escape')close()};
+  m.addEventListener('click',e=>{if(e.target===m||e.target.classList.contains('bzx'))close()});
+  document.addEventListener('keydown',esc);document.body.appendChild(m);
+};
 window.bzUpd=function(k,val){S[k]=val;bazi()};
 window.bazi=function(){v.innerHTML=baziHTML()};
 })();
