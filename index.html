@@ -158,7 +158,8 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz tr.dmrow td{background:color-mix(in srgb,#2f8f68 18%,var(--card))}
 .bz .bexp{margin-top:10px;font-size:14px;line-height:1.5;text-align:center;color:var(--fg);opacity:.85}
 .bz .tg-s,.bz .tg-d{color:#fff;border-radius:6px;padding:1px 7px;white-space:nowrap}.bz .tg-s{background:#1f7a55}.bz .tg-d{background:#b3382a}
-.bz .bzi{background:none;border:0;padding:0 0 0 8px;font-size:18px;line-height:1;color:var(--ic);cursor:pointer;vertical-align:middle;position:relative;top:-2px}
+.bz .bzi{display:block;background:none;border:0;padding:0;margin:2px 0 6px;font:600 13px inherit;font-family:inherit;color:var(--ic);cursor:pointer;text-align:left}
+.bz .bzi u{text-decoration:underline;text-underline-offset:3px;font-weight:800}
 .bzm{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.5)}
 .bzm .bzb{position:relative;width:100%;max-width:400px;max-height:85vh;overflow:auto;background:var(--card);color:var(--fg);border-radius:12px;padding:24px}
 .bzm h3{margin:0 28px 14px 0;font-size:17px;color:var(--em)}
@@ -168,6 +169,11 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bz{--gt:#4AA882;--rt:#F26B5B;--gb:#4AA882;--rb:#F26B5B;--ic:#fff}}
 :root[data-theme="dark"] .bz{--gt:#4AA882;--rt:#F26B5B;--gb:#4AA882;--rb:#F26B5B;--ic:#fff}
 .bz table.bzt td.sup,.bz table.bzt td.drn{font-weight:800}
+.bz .pl.dm .pn small{opacity:1}
+.bz .ei{width:1.7em;height:1.7em;vertical-align:-.5em;margin-left:10px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.bz .bzlab{display:flex;align-items:center;justify-content:center;gap:6px}
+.bz .bzlab>span{margin-right:-1.5px}
+.bz .bzlab .ei{margin:0;flex:none;vertical-align:baseline}
 .bz .sdp{display:inline-block;font-weight:700;border-radius:8px;padding:2px 9px;margin:2px 0}
 .bz .sdp.sup{background:#1f7a55;color:#fff}.bz .sdp.drn{background:#b3382a;color:#fff}
 .bz .sdv{margin:0 8px;color:var(--mut);font-weight:600}
@@ -180,7 +186,7 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .hero.bzh>*{position:relative;z-index:1}
 .bz .hero[data-el="木"]{--h:#3f7d4e}.bz .hero[data-el="火"]{--h:#c8503c}.bz .hero[data-el="土"]{--h:#8a6238}.bz .hero[data-el="金"]{--h:#9096a0}.bz .hero[data-el="水"]{--h:#3b82a6}
 .bz .hero.bzh .bd,.bz .hero.bzh .bsub{color:var(--fg)}
-.bz .pl.dm .pn,.bz .pl.dm label:first-of-type{color:var(--em)}
+.bz .pl.dm .pn,.bz .pl.dm label:first-of-type{color:var(--gt)}
 .bz .pl label{white-space:nowrap}
 .bz .bars{margin-top:12px;display:grid;gap:10px}
 .bz .barrow{display:grid;grid-template-columns:86px 1fr 52px;gap:10px;align-items:center}
@@ -413,6 +419,13 @@ function pillar(sk,bk,label,en,isDay){
   return `<div class="pl ${isDay?'dm':''}"><div class="pn">${label}<small>${en}</small></div>${stemSel}${brSel}</div>`;
 }
 
+const ICON={
+ 水:'<path d="M9 24q5.5-6 11 0t11 0 11 0 11 0M9 34q5.5-6 11 0t11 0 11 0 11 0M9 44q5.5-6 11 0t11 0 11 0 11 0"/>',
+ 火:'<path d="M32 11c2 9 13 15 13 27a13 13 0 0 1-26 0c0-7 4-10 7-15 0 4 2 7 5 8-1-8 0-14 1-20z"/><path d="M32 53c-4 0-7-3-7-7 0-3 2-5 4-7 0 3 1 4 3 5 0-2 1-4 2-6 2 3 5 5 5 8 0 4-3 7-7 7z"/>',
+ 木:'<path d="M15 49C15 29 29 15 49 15c0 20-14 34-34 34z"/><path d="M15 49 40 24M28 37v-9M34 31v-9M28 37h-9M34 31h-9"/>',
+ 金:'<path d="M26 20h12l3 9H23zM15 33h14l3 10H12zM35 33h14l3 10H32z"/>',
+ 土:'<path d="M5 25q27-12 54 2M4 36q28-14 56 2M6 47q26-12 52 3"/>'};
+const icon=el=>`<svg class="ei" viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="eic"><circle cx="32" cy="32" r="29"/></clipPath></defs><circle cx="32" cy="32" r="29"/><g clip-path="url(#eic)">${ICON[el]}</g></svg>`;
 function baziHTML(){
   const r=compute();
   const total=r.sup+r.drn;
@@ -429,13 +442,14 @@ function baziHTML(){
     </div></div>`;
 
   // 强弱结论
-  const verdict=`<div class="card hero bzh ${r.strong?'str':'wk'}" data-el="${r.dmEl}" style="--e:var(${EC[r.dmEl]})"><div class="bd">Day Master 日主 · ${r.dm}${r.dmEl} ${EN[r.dmEl]}</div>
+  const verdict=`<div class="card hero bzh ${r.strong?'str':'wk'}" data-el="${r.dmEl}" style="--e:var(${EC[r.dmEl]})"><div class="bd bzlab"><span>Day Master 日主 · ${r.dm}${r.dmEl} ${EN[r.dmEl]}</span>${icon(r.dmEl)}</div>
     <div class="bbig">${r.strong?'身强':'身弱'}</div>
     <div class="bsub">${r.strong?'Strong Day Master — needs draining / control 需克制消耗':'Weak Day Master — needs support / backing 需帮扶'}</div>
     <div class="bexp">${r.strong?'This chart is Strong (身强). Output, Wealth &amp; Power are your <b class="tg-s">[+ Balance]</b> elements, while Peer &amp; Resource are your <b class="tg-d">[- Overload]</b> elements.':'This chart is Weak (身弱). Peer &amp; Resource are your <b class="tg-s">[+ Support]</b> elements, while Output, Wealth &amp; Power are your <b class="tg-d">[- Drain]</b> elements.'}</div></div>`;
 
   // 分数条
-  const bars=`<div class="card"><h2>Strength score <span class="z">强弱打分</span><button class="bzi" onclick="bzInfo()" aria-label="Info">ⓘ</button></h2>
+  const bars=`<div class="card"><h2>Strength score <span class="z">强弱打分</span></h2>
+    <button class="bzi" onclick="bzInfo()">Click <u>here</u> for more information</button>
     <div class="sb">Support vs Drain → Total 100 points<span class="zl"><span class="sdp sup">帮扶（同我 · 生我）</span><span class="sdv">vs</span><span class="sdp drn">消耗（我生 · 我克 · 克我）</span></span><span class="zl">满分 100 点 · 日元不计分</span></div>
     <div class="bars">
       <div class="barrow"><div class="bnm sup">帮扶 Support<small>同我 · 生我</small></div><div class="bbar"><i class="i-sup" style="width:${supPct}%"></i></div><div class="bsc sup">${r.sup}</div></div>
