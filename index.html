@@ -158,29 +158,27 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz tr.dmrow td{background:color-mix(in srgb,#2f8f68 18%,var(--card))}
 .bz .bexp{margin-top:10px;font-size:14px;line-height:1.5;text-align:center;color:var(--fg);opacity:.85}
 .bz .tg-s,.bz .tg-d{color:#fff;border-radius:6px;padding:1px 7px;white-space:nowrap}.bz .tg-s{background:#1f7a55}.bz .tg-d{background:#b3382a}
-.bz .bzi{background:none;border:0;padding:0 0 0 8px;font-size:18px;line-height:1;color:var(--em);cursor:pointer;vertical-align:middle}
+.bz .bzi{background:none;border:0;padding:0 0 0 8px;font-size:18px;line-height:1;color:var(--ic);cursor:pointer;vertical-align:middle;position:relative;top:-2px}
 .bzm{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.5)}
 .bzm .bzb{position:relative;width:100%;max-width:400px;max-height:85vh;overflow:auto;background:var(--card);color:var(--fg);border-radius:12px;padding:24px}
 .bzm h3{margin:0 28px 14px 0;font-size:17px;color:var(--em)}
 .bzm ul{margin:0;padding:0;list-style:none}.bzm li{margin-bottom:12px;font-size:14px;line-height:1.5}
 .bzm .bzx{position:absolute;top:12px;right:12px;width:30px;height:30px;border:0;border-radius:50%;background:var(--soft);color:var(--fg);font-size:14px;cursor:pointer}
+.bz{--gt:var(--em);--rt:#c8503c;--gb:var(--em2);--rb:#c8503c;--ic:var(--mut)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bz{--gt:#6F9A8D;--rt:#FF8FA3;--gb:#6F9A8D;--rb:#FF8FA3;--ic:#fff}}
+:root[data-theme="dark"] .bz{--gt:#6F9A8D;--rt:#FF8FA3;--gb:#6F9A8D;--rb:#FF8FA3;--ic:#fff}
+.bz table.bzt td.sup,.bz table.bzt td.drn{font-weight:800}
 .bz .sdp{display:inline-block;font-weight:700;border-radius:8px;padding:2px 9px;margin:2px 0}
 .bz .sdp.sup{background:#1f7a55;color:#fff}.bz .sdp.drn{background:#b3382a;color:#fff}
 .bz .sdv{margin:0 8px;color:var(--mut);font-weight:600}
-.bz .fd{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.bz .fd{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:start}
 .bz .fd>div{border-left:4px solid var(--c);padding:2px 0 2px 10px;font-size:12.5px;color:var(--mut);line-height:1.45;min-width:0}
 .bz .fd h4{margin:0 0 6px;color:var(--fg);font-size:13px}
 .bz .fi{margin-bottom:8px}.bz .fi b{display:block;color:var(--fg)}.bz .fi small{display:block;font-size:11px;opacity:.85}
 .bz .hero.bzh{--k:22%;background:color-mix(in srgb,var(--h) var(--k),var(--card));color:var(--fg);border:0;position:relative;overflow:hidden}
-.bz .hero.bzh.str{--k:30%}
+.bz .hero.bzh.str{--k:22%}
 .bz .hero.bzh>*{position:relative;z-index:1}
-.bz .hero.bzh::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55}
 .bz .hero[data-el="木"]{--h:#3f7d4e}.bz .hero[data-el="火"]{--h:#c8503c}.bz .hero[data-el="土"]{--h:#8a6238}.bz .hero[data-el="金"]{--h:#9096a0}.bz .hero[data-el="水"]{--h:#3b82a6}
-.bz .hero[data-el="木"]::before{background:radial-gradient(circle at 12% 30%,rgba(190,240,150,.35) 0 14px,transparent 15px),radial-gradient(circle at 80% 20%,rgba(190,240,150,.28) 0 22px,transparent 23px),radial-gradient(circle at 60% 85%,rgba(190,240,150,.3) 0 12px,transparent 13px),radial-gradient(ellipse 30% 80% at 92% 100%,rgba(60,140,70,.45),transparent),radial-gradient(ellipse 25% 70% at 6% 100%,rgba(60,140,70,.4),transparent)}
-.bz .hero[data-el="火"]::before{background:radial-gradient(ellipse 22% 75% at 14% 105%,rgba(255,170,50,.55),transparent),radial-gradient(ellipse 18% 60% at 40% 108%,rgba(255,110,40,.45),transparent),radial-gradient(ellipse 24% 80% at 72% 106%,rgba(255,170,50,.5),transparent),radial-gradient(ellipse 16% 55% at 94% 105%,rgba(255,110,40,.45),transparent)}
-.bz .hero[data-el="土"]::before{background:repeating-linear-gradient(0deg,rgba(60,35,15,.16) 0 10px,rgba(255,235,200,.08) 10px 22px),radial-gradient(circle at 20% 30%,rgba(60,35,15,.25) 0 2px,transparent 3px),radial-gradient(circle at 70% 60%,rgba(60,35,15,.25) 0 3px,transparent 4px),radial-gradient(circle at 45% 85%,rgba(60,35,15,.25) 0 2px,transparent 3px)}
-.bz .hero[data-el="金"]::before{background:repeating-linear-gradient(100deg,rgba(255,255,255,.18) 0 2px,transparent 2px 8px),linear-gradient(115deg,transparent 30%,rgba(255,255,255,.28) 45%,transparent 60%)}
-.bz .hero[data-el="水"]::before{background:radial-gradient(circle at 15% 70%,transparent 0 9px,rgba(255,255,255,.4) 10px 11px,transparent 12px),radial-gradient(circle at 35% 35%,transparent 0 14px,rgba(255,255,255,.35) 15px 16px,transparent 17px),radial-gradient(circle at 70% 75%,transparent 0 12px,rgba(255,255,255,.38) 13px 14px,transparent 15px),radial-gradient(circle at 88% 30%,transparent 0 7px,rgba(255,255,255,.4) 8px 9px,transparent 10px),linear-gradient(180deg,transparent 60%,rgba(255,255,255,.14))}
 .bz .hero.bzh .bd,.bz .hero.bzh .bsub{color:var(--fg)}
 .bz .pl.dm .pn,.bz .pl.dm label:first-of-type{color:var(--em)}
 .bz .pl label{white-space:nowrap}
@@ -190,8 +188,8 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .bbar{height:14px;background:var(--soft);border-radius:8px;overflow:hidden}
 .bz .bbar i{display:block;height:100%;border-radius:8px}
 .bz .bsc{font:800 16px Inter;text-align:center}
-.bz .sup{color:var(--em)}.bz .drn{color:#c8503c}
-.bz .i-sup{background:var(--em2)}.bz .i-drn{background:#c8503c}
+.bz .sup{color:var(--gt)}.bz .drn{color:var(--rt)}
+.bz .i-sup{background:var(--gb)}.bz .i-drn{background:var(--rb)}
 .bz table.bzt{width:100%;border-collapse:collapse;font-size:13px}
 .bz table.bzt th{font:700 11.5px Inter;color:var(--mut);text-align:center;padding:6px;border-bottom:1px solid var(--line)}
 .bz table.bzt td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:center}
@@ -474,7 +472,7 @@ function baziHTML(){
   const sp=t=>{const k=t.indexOf(' ');return [t.slice(0,k),t.slice(k+1)]};
   const wx=ORDER.map(k=>{
     const el=WXQS[r.seasonEl][k],sd=STATUS[k],[tz]=sp(sd.tr);
-    return `<div style="--e:var(${EC[el]})"><b class="wm">${sd.zh}</b>${el}<em>${sd.zh}</em><span>${tz}</span></div>`;
+    return `<div style="--e:var(${EC[el]})"><b class="wm">${sd.zh}</b>${el}<span>${tz}</span></div>`;
   }).join('');
   const wdesc=ORDER.map(k=>{
     const el=WXQS[r.seasonEl][k],sd=STATUS[k],[tz,te]=sp(sd.tr);
