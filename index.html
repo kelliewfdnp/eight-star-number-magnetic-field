@@ -174,6 +174,11 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .bzlab{display:flex;align-items:center;justify-content:center;gap:6px}
 .bz .bzlab>span{margin-right:-1.5px}
 .bz .bzlab .ei{margin:0;flex:none;vertical-align:baseline}
+.bz .bin{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.bz .bin label{display:block;font:600 11px Inter;color:var(--mut);text-align:center}.bz .bin .bw{grid-column:1/-1}
+.bz .bin input,.bz .bin select{display:block;width:100%;min-width:0;margin-top:4px;padding:10px 6px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:600 15px Inter,sans-serif;text-align:center;text-align-last:center;box-sizing:border-box}
+.bz .bgo{display:block;width:100%;margin-top:10px;padding:12px;border:0;border-radius:12px;background:var(--em);color:#fff;font:800 14px Inter,sans-serif;cursor:pointer}
+.bz .bmsg{margin-top:10px;text-align:center;font:700 13px "PingFang SC","Noto Sans SC",Inter,sans-serif;color:var(--gt)}
 .bz .sdp{display:inline-block;font-weight:700;border-radius:8px;padding:2px 9px;margin:2px 0}
 .bz .sdp.sup{background:#1f7a55;color:#fff}.bz .sdp.drn{background:#b3382a;color:#fff}
 .bz .sdv{margin:0 8px;color:var(--mut);font-weight:600}
@@ -426,6 +431,34 @@ const ICON={
  金:'<path d="M26 20h12l3 9H23zM15 33h14l3 10H12zM35 33h14l3 10H32z"/>',
  土:'<path d="M5 25q27-12 54 2M4 36q28-14 56 2M6 47q26-12 52 3"/>'};
 const icon=el=>`<svg class="ei" viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="eic"><circle cx="32" cy="32" r="29"/></clipPath></defs><circle cx="32" cy="32" r="29"/><g clip-path="url(#eic)">${ICON[el]}</g></svg>`;
+/* ---- birth date/time -> four pillars (clock time as entered; no solar-time correction) ---- */
+const ST='甲乙丙丁戊己庚辛壬癸',BR='子丑寅卯辰巳午未申酉戌亥';
+const B={d:'',t:'12:00',z:'8',msg:''};
+const ZONES=[['-8','UTC−8 Los Angeles'],['-5','UTC−5 New York'],['0','UTC+0 London'],['1','UTC+1 Paris'],['3','UTC+3 Moscow'],['5.5','UTC+5:30 India'],['7','UTC+7 Bangkok'],['8','UTC+8 Beijing · Singapore · KL · HK'],['9','UTC+9 Tokyo · Seoul'],['10','UTC+10 Sydney'],['12','UTC+12 Auckland']];
+function sunLon(jd){const T=(jd-2451545)/36525,r=Math.PI/180;
+  const L0=280.46646+36000.76983*T,M=(357.52911+35999.05029*T)*r;
+  const C=(1.914602-0.004817*T)*Math.sin(M)+0.019993*Math.sin(2*M)+0.000289*Math.sin(3*M);
+  const om=(125.04-1934.136*T)*r;
+  return (((L0+C-0.00569-0.00478*Math.sin(om))%360)+360)%360}
+function pillarsOf(ds,ts,z){
+  const [Y,Mo,D]=ds.split('-').map(Number),[H,Mi]=ts.split(':').map(Number);
+  if(!Y||!Mo||!D||isNaN(H)||isNaN(Mi))return null;
+  const jd=Date.UTC(Y,Mo-1,D,H,Mi)/86400000+2440587.5-z/24, lon=sunLon(jd);
+  const yr=(Mo<=2&&lon>=200&&lon<315)?Y-1:Y;
+  const ys=((yr-4)%10+10)%10,yb=((yr-4)%12+12)%12;
+  const m=Math.floor(((lon-315+360)%360)/30), mb=(2+m)%12, ms=((ys%5)*2+2+m)%10;
+  const jdn=Date.UTC(Y,Mo-1,D)/86400000+2440588+(H>=23?1:0);
+  const di=(((jdn-2451545+54)%60)+60)%60, dsI=di%10, dbI=di%12;
+  const hb=Math.floor(((H+1)%24)/2), hs=((dsI%5)*2+hb)%10;
+  return {ys:ST[ys],yb:BR[yb],ms:ST[ms],mb:BR[mb],ds:ST[dsI],db:BR[dbI],hs:ST[hs],hb:BR[hb]}}
+window.bzBirth=function(k,v){B[k]=v};
+window.bzCalc=function(){
+  const r=pillarsOf(B.d,B.t,Number(B.z));
+  if(!r){B.msg='Please enter both a birth date and a time. 请填写出生日期与时间。';bazi();return}
+  Object.assign(S,r);
+  B.msg=`已排盘 Calculated: ${r.ys}${r.yb} · ${r.ms}${r.mb} · ${r.ds}${r.db} · ${r.hs}${r.hb}`;
+  bazi()};
+window.bzPillars=pillarsOf;
 function baziHTML(){
   const r=compute();
   const total=r.sup+r.drn;
@@ -441,6 +474,16 @@ function baziHTML(){
       ${pillar('hs','hb','时柱','Hour')}
     </div></div>`;
 
+  const birth=`<div class="card"><h2>Birth date &amp; time <span class="z">出生日期时间</span></h2>
+    <div class="sb">Enter the birth details to fill the four pillars below. Clock time is used as entered, with no solar-time correction.<span class="zl">按所填钟表时间排盘，未作真太阳时校正；23:00 起按次日子时。</span></div>
+    <div class="bin">
+      <label>Date 日期<input type="date" value="${B.d}" onchange="bzBirth('d',this.value)"></label>
+      <label>Time 时间<input type="time" value="${B.t}" onchange="bzBirth('t',this.value)"></label>
+      <label class="bw">Time zone 时区<select onchange="bzBirth('z',this.value)">${ZONES.map(z=>`<option value="${z[0]}"${z[0]===B.z?' selected':''}>${z[1]}</option>`).join('')}</select></label>
+    </div>
+    <button class="bgo" onclick="bzCalc()">Calculate pillars 排盘</button>
+    ${B.msg?`<div class="bmsg">${B.msg}</div>`:''}
+    <div class="bnote" style="margin-top:8px">Solar terms are calculated (accurate to about 15 minutes); verify births very close to a term boundary.<br>节气以公式推算，误差约 15 分钟内。</div></div>`;
   // 强弱结论
   const verdict=`<div class="card hero bzh ${r.strong?'str':'wk'}" data-el="${r.dmEl}" style="--e:var(${EC[r.dmEl]})"><div class="bd bzlab"><span>Day Master 日主 · ${r.dm}${r.dmEl} ${EN[r.dmEl]}</span>${icon(r.dmEl)}</div>
     <div class="bbig">${r.strong?'身强':'身弱'}</div>
@@ -521,7 +564,7 @@ function baziHTML(){
     <b>Note 说明：</b>This implements the simplified fixed-weight teaching method from the reference lecture. The Day Stem (日元) is the reference point and carries no score; the remaining positions total 100 points. Branch scoring uses its main qi (本气); hidden stems are shown for reference. Classical Zi Ping BaZi additionally considers combinations, clashes, and hidden-stem priority, which this quick self-check does not model. For cultural reference only.
     <span class="zl">本工具采用参考课程中的简化固定打分法：日元为参照不计分，其余位置合计 100 分；地支以本气计分，藏干仅供参考。传统子平八字还需论合冲、藏干主次等，本速查未纳入，仅供文化参考。</span></div></div>`;
 
-  return `<div class="bz">${pillars+verdict+bars+detail+wxqs+favav+note}</div>`;
+  return `<div class="bz">${birth+pillars+verdict+bars+detail+wxqs+favav+note}</div>`;
 }
 
 window.bzInfo=function(){
