@@ -177,7 +177,7 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .bin{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .bz .bin label{display:block;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:10px 8px;font:600 10.5px Inter;color:var(--mut);text-align:center}.bz .bin .bw{grid-column:1/-1}
 .bz .bin input,.bz .bin select{display:block;width:100%;min-width:0;height:44px;margin-top:6px;padding:0;border-radius:10px;border:1px solid var(--line);background-color:var(--card);color:var(--fg);font:700 16px "PingFang SC","Noto Sans SC",Inter,sans-serif;text-align:center;text-align-last:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;box-shadow:none}
-.bz .bin select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding:0 24px}
+.bz .bin select{font-size:14px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding:0 24px}
 .bz .bin label{position:relative}
 .bz .bin label.gd{background:color-mix(in srgb,#2f8f68 20%,var(--soft));color:var(--gt)}
 .bz .bin label.empty::after{content:"Tap to choose 点击选择";position:absolute;left:8px;right:8px;bottom:10px;height:44px;line-height:44px;text-align:center;font:600 14px Inter,sans-serif;color:var(--mut);pointer-events:none}
@@ -442,8 +442,12 @@ const ICON={
 const icon=el=>`<svg class="ei" viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="eic"><circle cx="32" cy="32" r="29"/></clipPath></defs><circle cx="32" cy="32" r="29"/><g clip-path="url(#eic)">${ICON[el]}</g></svg>`;
 /* ---- birth date/time -> four pillars (clock time as entered; no solar-time correction) ---- */
 const ST='甲乙丙丁戊己庚辛壬癸',BR='子丑寅卯辰巳午未申酉戌亥';
-const B={d:'',t:'12:00',z:'8',msg:''};
-const ZONES=[['-8','UTC−8 Los Angeles'],['-5','UTC−5 New York'],['0','UTC+0 London'],['1','UTC+1 Paris'],['3','UTC+3 Moscow'],['5.5','UTC+5:30 India'],['7','UTC+7 Bangkok'],['8','UTC+8 Beijing · Singapore · KL · HK'],['9','UTC+9 Tokyo · Seoul'],['10','UTC+10 Sydney'],['12','UTC+12 Auckland']];
+const NOW=new Date(),p2=n=>String(n).padStart(2,'0');
+const B={d:`${NOW.getFullYear()}-${p2(NOW.getMonth()+1)}-${p2(NOW.getDate())}`,t:`${p2(NOW.getHours())}:${p2(NOW.getMinutes())}`,z:'8',msg:''};
+const ZONES=[['-8','UTC−8 Los Angeles'],['-5','UTC−5 New York'],['0','UTC+0 London'],['1','UTC+1 Paris'],['3','UTC+3 Moscow'],['5.5','UTC+5:30 India'],['7','UTC+7 Bangkok'],['8','UTC+8 Beijing · Singapore · KL'],['9','UTC+9 Tokyo · Seoul'],['10','UTC+10 Sydney'],['12','UTC+12 Auckland']];
+{const o=-NOW.getTimezoneOffset()/60;
+  if(!ZONES.some(z=>Number(z[0])===o)){ZONES.push([String(o),'UTC'+(o>=0?'+':'−')+Math.abs(o)+' this device']);ZONES.sort((a,b)=>a[0]-b[0])}
+  B.z=String(o)}
 function sunLon(jd){const T=(jd-2451545)/36525,r=Math.PI/180;
   const L0=280.46646+36000.76983*T,M=(357.52911+35999.05029*T)*r;
   const C=(1.914602-0.004817*T)*Math.sin(M)+0.019993*Math.sin(2*M)+0.000289*Math.sin(3*M);
