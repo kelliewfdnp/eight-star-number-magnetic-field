@@ -175,8 +175,17 @@ input{width:100%;font:600 20px Inter,sans-serif;padding:11px 13px;border-radius:
 .bz .bzlab>span{margin-right:-1.5px}
 .bz .bzlab .ei{margin:0;flex:none;vertical-align:baseline}
 .bz .bin{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.bz .bin label{display:block;font:600 11px Inter;color:var(--mut);text-align:center}.bz .bin .bw{grid-column:1/-1}
-.bz .bin input,.bz .bin select{display:block;width:100%;min-width:0;margin-top:4px;padding:10px 6px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:600 15px Inter,sans-serif;text-align:center;text-align-last:center;box-sizing:border-box}
+.bz .bin label{display:block;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:10px 8px;font:600 10.5px Inter;color:var(--mut);text-align:center}.bz .bin .bw{grid-column:1/-1}
+.bz .bin input,.bz .bin select{display:block;width:100%;min-width:0;height:44px;margin-top:6px;padding:0;border-radius:10px;border:1px solid var(--line);background-color:var(--card);color:var(--fg);font:700 16px "PingFang SC","Noto Sans SC",Inter,sans-serif;text-align:center;text-align-last:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;box-shadow:none}
+.bz .bin select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding:0 24px}
+.bz .bin label{position:relative}
+.bz .bin label.gd{background:color-mix(in srgb,#2f8f68 20%,var(--soft));color:var(--gt)}
+.bz .bin label.empty::after{content:"Tap to choose 点击选择";position:absolute;left:8px;right:8px;bottom:10px;height:44px;line-height:44px;text-align:center;font:600 14px Inter,sans-serif;color:var(--mut);pointer-events:none}
+.bz .bin input[type=date],.bz .bin input[type=time]{line-height:42px}
+.bz .bin input::-webkit-date-and-time-value{text-align:center;line-height:42px;min-height:42px;margin:0}
+.bz .bin input::-webkit-datetime-edit{padding:0;line-height:42px;text-align:center}
+.bz .bin input::-webkit-datetime-edit,.bz .bin input::-webkit-datetime-edit-fields-wrapper{background:transparent;padding:0}
+.bz .bin input:focus,.bz .bin select:focus{outline:0;box-shadow:0 0 0 2px rgba(59,130,246,.55)}
 .bz .bgo{display:block;width:100%;margin-top:10px;padding:12px;border:0;border-radius:12px;background:var(--em);color:#fff;font:800 14px Inter,sans-serif;cursor:pointer}
 .bz .bmsg{margin-top:10px;text-align:center;font:700 13px "PingFang SC","Noto Sans SC",Inter,sans-serif;color:var(--gt)}
 .bz .sdp{display:inline-block;font-weight:700;border-radius:8px;padding:2px 9px;margin:2px 0}
@@ -477,8 +486,8 @@ function baziHTML(){
   const birth=`<div class="card"><h2>Birth date &amp; time <span class="z">出生日期时间</span></h2>
     <div class="sb">Enter the birth details to fill the four pillars below. Clock time is used as entered, with no solar-time correction.<span class="zl">按所填钟表时间排盘，未作真太阳时校正；23:00 起按次日子时。</span></div>
     <div class="bin">
-      <label>Date 日期<input type="date" value="${B.d}" onchange="bzBirth('d',this.value)"></label>
-      <label>Time 时间<input type="time" value="${B.t}" onchange="bzBirth('t',this.value)"></label>
+      <label class="gd${B.d?'':' empty'}">Date 日期<input type="date" value="${B.d}" onchange="bzBirth('d',this.value);this.parentNode.classList.toggle('empty',!this.value)"></label>
+      <label class="gd">Time 时间<input type="time" value="${B.t}" onchange="bzBirth('t',this.value)"></label>
       <label class="bw">Time zone 时区<select onchange="bzBirth('z',this.value)">${ZONES.map(z=>`<option value="${z[0]}"${z[0]===B.z?' selected':''}>${z[1]}</option>`).join('')}</select></label>
     </div>
     <button class="bgo" onclick="bzCalc()">Calculate pillars 排盘</button>
