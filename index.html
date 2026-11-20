@@ -33,6 +33,13 @@ main{max-width:760px;margin:0 auto;padding:14px 14px 100px}
 .pc{border:0;border-radius:11px;padding:6px 10px;background:var(--c,#94a3b8);color:#fff;font:700 15px Inter,sans-serif;text-align:center;min-width:56px}
 .pc small{display:block;font:600 11px "PingFang SC","Noto Sans SC",sans-serif;opacity:.95}
 .pc.hid{background:rgba(148,163,184,.85)}
+.pc.mh,.pc.mx,.pc.mb{position:relative;overflow:hidden;isolation:isolate}
+.pc .wm{position:absolute;left:50%;top:50%;height:88%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 20px/1 "PingFang SC","Noto Sans SC",serif;opacity:.2;z-index:-1;pointer-events:none}
+.xh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.xh h2{flex:1;min-width:0}
+.xm{display:flex;align-items:center;gap:8px;flex:none}
+.xl{font-size:12px;font-weight:700;text-align:right;line-height:1.2}.xl small{display:block;color:var(--mut);font-weight:600;font-size:10.5px}
+.sw.sm{width:42px;height:26px;border-radius:13px}.sw.sm i{top:3px;left:3px;width:20px;height:20px}.sw.sm.on i{left:19px}
+.xn{margin:8px 0 12px;padding:10px 12px;border-radius:12px;background:var(--soft);border-left:4px solid var(--em);font-size:12.5px;line-height:1.55;color:var(--mut)}.xn div+div{margin-top:6px}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
 .st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
 .st b{display:block;font-size:22px;font-weight:800;line-height:1.1}.st span{font-size:11.5px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
@@ -265,7 +272,16 @@ const S=[
 const RC={y:'#e3b92a',o:'#e07a5f',b:'#5aa7d6'},M={};
 S.forEach(s=>s.p.forEach(x=>x.split('/').forEach(k=>M[k]=s)));
 function pr(p){if(/[05]/.test(p))return{z:'隐',en:'Hidden 隐 · 太极点 (contains 0 or 5 · 含0或5)',col:'#94a3b8',hid:1};const s=M[p];return{z:s.z,en:s.en+' · '+s.el,col:s.col,s}}
-const pairs=n=>{const a=[];for(let i=0;i<n.length-1;i++)a.push(n.slice(i,i+2));return a};
+const pairsA=n=>{const a=[];for(let i=0;i<n.length-1;i++)a.push(n.slice(i,i+2));return a};
+function pairsM(n){if(!EX)return pairsA(n).map(p=>({p,m:'',raw:p}));
+ const d=n.split(''),o=[];let last=-1;
+ d.forEach((c,i)=>{if(c==='0'||c==='5')return;
+  if(last>=0){const run=d.slice(last+1,i).join(''),z=run.includes('0'),f=run.includes('5');
+   o.push({p:d[last]+c,m:z&&f?'隐显':f?'显':z?'隐':'',raw:d.slice(last,i+1).join('')})}
+  last=i});return o}
+const pairs=n=>EX?pairsM(n).map(o=>o.p):pairsA(n);
+const MN={'隐':['0 隐','0 = 隐: the star is still there, but dimmer, slower and low-key 星曜仍在，但偏暗、偏慢，不张扬'],'显':['5 显','5 = 显: the star is amplified, more visible and easier to notice 星曜被放大，更外显、更容易被看见'],'隐显':['隐 · 显','0 and 5 together: hidden and amplified marks both apply 0 与 5 并存，隐与显同时作用']};
+const pcm=o=>{if(!o.m)return pc(o.p);const r=pr(o.p),k=o.m==='隐'?'mh':o.m==='显'?'mx':'mb';return `<button class="pc ${k}" style="--c:${r.col}" onclick="say('<b>${o.raw}</b> → ${o.p} ${r.z} · ${r.en}<br>${MN[o.m][1]}')"><b class="wm">${o.m}</b>${o.p}<small>${r.z}</small></button>`};
 const info=document.getElementById('info');let tm;
 function say(t){info.innerHTML=t;info.style.display='block';clearTimeout(tm);tm=setTimeout(()=>info.style.display='none',6000)}
 const pc=p=>{const r=pr(p);return `<button class="pc ${r.hid?'hid':''}" style="--c:${r.col}" onclick="say('<b>${p}</b> → ${r.z} · ${r.en}')">${p}<small>${r.z}</small></button>`};
@@ -283,6 +299,8 @@ function nav(){document.getElementById('nav').innerHTML=tabs.map((t,i)=>`<button
 function R(){info.style.display='none';[lab,tb,gd,bazi][cur]();scrollTo(0,0)}
 let QB='';
 const LS=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'[]');localStorage.setItem(k,JSON.stringify(v))}catch(e){return[]}};
+let EX=LS('nc_ex')===true;
+function tgEX(){EX=!EX;LS('nc_ex',EX);lab()}
 let EM=LS('nc_em')===true;
 const hlx=(x,g)=>EM?hl(x,g):'';
 function tgEM(){EM=!EM;LS('nc_em',EM);R()}
@@ -290,18 +308,18 @@ let EL=(()=>{const o=LS('nc_el');return o&&!Array.isArray(o)?{x:o.x||[],j:o.j||[
 function tl(n){const ps=n.length>1?pairs(n).map(pr):[],c={};let h=0;ps.forEach(r=>{if(r.hid)h++;else c[r.s.z]=(c[r.s.z]||0)+1});
 const sum=g=>S.filter(s=>(s.r>0)==g).reduce((x,s)=>x+(c[s.z]||0),0);return{ps,c,h,good:sum(true),bad:sum(false)}}
 function tallyHTML(n){const t=tl(n);if(!t.ps.length)return '';
-return `<div class="sb" style="margin:12px 0 0">Tally 统计</div>`+[...S].sort((a,b)=>b.r-a.r).filter(s=>t.c[s.z]).map(s=>`<span class="tp" style="--c:${s.col}">${s.z} ×${t.c[s.z]}</span>`).join('')+(t.h?`<span class="tp" style="--c:#94a3b8">隐 ×${t.h}</span>`:'')}
+return `<div class="sb" style="margin:12px 0 0">Tally 统计</div>`+[...S].sort((a,b)=>b.r-a.r).filter(s=>t.c[s.z]).map(s=>`<span class="tp" style="--c:${s.col}">${s.z} ×${t.c[s.z]}</span>`).join('')+(t.h?`<span class="tp" style="--c:#94a3b8">隐 ×${t.h}</span>`:'')+(EX?(m=>[['隐','0 隐','#94a3b8'],['显','5 显','#5aa7d6']].map(([k,l,c])=>{const n=m.filter(o=>o.m.includes(k)).length;return n?`<span class="tp" style="--c:${c}">${l} ×${n}</span>`:''}).join(''))(pairsM(n)):'')}
 const strip=n=>pairs(n).map(p=>`<i style="--c:${pr(p).col}"></i>`).join('');
 function lab(){
-v.innerHTML=`<div class="card"><h2>Enter any number <span class="z">输入任意号码</span></h2><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div><input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)" onchange="sv(this.value)"><div class="pairs" id="o"></div><div id="t1"></div></div>
+v.innerHTML=`<div class="card"><div class="xh"><h2>Enter any number <span class="z">输入任意号码</span></h2><div class="xm"><span class="xl">Expert mode<small>专家模式</small></span><button class="sw sm${EX?' on':''}" role="switch" aria-checked="${EX}" aria-label="Expert mode" onclick="tgEX()"><i></i></button></div></div><div class="sb">Type digits to see each adjacent pair.<span class="zl">输入数字，查看每组相邻数字。</span></div>${EX?`<div class="xn"><div>Expert mode: 0 and 5 do not form stars on their own. When one sits between two digits, those two digits form the pair. A 0 hides the star (still present, but dimmer, slower and low-key); a 5 amplifies it (more visible, easier to notice). Inauspicious stars work the same way. A 0 or 5 at the very start or end forms no pair; if both appear together, both marks apply.</div><div>专家模式：0 和 5 不单独成星，夹在中间时，前后两位连成一对。0 为“隐”（星曜仍在，但偏暗、偏慢，不张扬）；5 为“显”（星曜被放大，更外显、更容易被看见）。凶星同理。号码首尾的 0 或 5 不成对；两者并存则同时作用。</div></div>`:''}<input id="q" inputmode="numeric" placeholder="e.g. 88613043" value="${QV}" oninput="an(this.value)" onchange="sv(this.value)"><div class="pairs" id="o"></div><div id="t1"></div></div>
 <div class="card"><h2>Compare with another number <span class="z">对比另一个号码</span></h2><div class="sb">Enter a second number to compare the two.<span class="zl">输入第二个号码，对比两者。</span></div><input id="q2" inputmode="numeric" placeholder="e.g. 91421358" value="${QB}" oninput="an2(this.value)" onchange="sv(this.value)"><div class="pairs" id="o2"></div><div id="t2"></div><div id="cmp"></div></div>
 <div class="card"><div class="sh hh"><h2>History <span class="z">历史记录</span></h2><button class="mb" onclick="clr()"><i class="pd"></i>Clear all 清除全部</button></div><div class="sb">Saved on this device when you tap away from the box. Load a number into A or B.<span class="zl">离开输入框时自动保存在本设备。可载入到 A 或 B。</span></div><div id="hist"></div></div>
 <div class="card" id="eld">${elHTML()}</div>
 <div class="card" id="spw"></div>
 <div class="card"><h2>Star Strength Order <span class="z">星曜强弱</span></h2><div class="sb" style="margin:0"><b>Auspicious 吉星</b><br>Stability &lt; Life Generating &lt; Heavenly Doctor &lt; Longevity<br>伏位 &lt; 生气 &lt; 天医 &lt; 延年<br><br><b>Inauspicious 凶星</b><br>Six Killings &lt; Mishaps &lt; Five Ghosts &lt; Life Threatening<br>六煞 &lt; 祸害 &lt; 五鬼 &lt; 绝命</div></div>`;
 an(QV);an2(QB);hist()}
-function an(x){x=x.replace(/\D/g,'');QV=x;document.getElementById('o').innerHTML=x.length>1?pairs(x).map(pc).join(''):'';document.getElementById('t1').innerHTML=tallyHTML(x);spec();cmp()}
-function an2(x){x=x.replace(/\D/g,'');QB=x;document.getElementById('o2').innerHTML=x.length>1?pairs(x).map(pc).join(''):'';document.getElementById('t2').innerHTML=tallyHTML(x);cmp()}
+function an(x){x=x.replace(/\D/g,'');QV=x;document.getElementById('o').innerHTML=x.length>1?pairsM(x).map(pcm).join(''):'';document.getElementById('t1').innerHTML=tallyHTML(x);spec();cmp()}
+function an2(x){x=x.replace(/\D/g,'');QB=x;document.getElementById('o2').innerHTML=x.length>1?pairsM(x).map(pcm).join(''):'';document.getElementById('t2').innerHTML=tallyHTML(x);cmp()}
 function cmp(){const el=document.getElementById('cmp');if(!el)return;if(QV.length<2||QB.length<2){el.innerHTML='';return}
 const a=tl(QV),b=tl(QB),cell=(n,c)=>`<div class="cc ${n?'on':''}" style="--c:${c}">${n||'–'}</div>`;
 const row=(lab,x,y,c,dot)=>`<div class="nm2">${dot?`<span class="dot" style="--c:${c}"></span>`:''}${lab}</div>${cell(x,c)}${cell(y,c)}`;
