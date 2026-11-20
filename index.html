@@ -34,11 +34,19 @@ main{max-width:760px;margin:0 auto;padding:14px 14px 100px}
 .pc small{display:block;font:600 11px "PingFang SC","Noto Sans SC",sans-serif;opacity:.95}
 .pc.hid{background:rgba(148,163,184,.85)}
 .pc.mh,.pc.mx,.pc.mb{position:relative;overflow:hidden;isolation:isolate}
-.pc.mh{opacity:.86}
-.pc.mx{filter:saturate(1.12) brightness(1.1);box-shadow:0 2px 8px color-mix(in srgb,var(--c) 40%,transparent)}
-.pc.mh{opacity:.86}
-.pc.mx{filter:brightness(1.12) saturate(1.15);box-shadow:0 2px 8px rgba(0,0,0,.22)}
-.pc.mb{filter:brightness(1.06) saturate(1.08);opacity:.93}
+/* 隐/显 pulse. Default = Option 1 (ring + word pulse). To switch to Option 2 (background pulse) set <html data-pulse="bg"> */
+.pc.mh .wm,.pc.mx .wm,.pc.mb .wm{will-change:transform}
+.pc.mh .wm{animation:mhp 2.4s ease-in-out infinite}
+.pc.mx .wm,.pc.mb .wm{animation:mxp 1.3s ease-in-out infinite}
+@keyframes mhp{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.16)}}
+@keyframes mxp{0%{transform:translate(-50%,-50%) scale(1)}14%{transform:translate(-50%,-50%) scale(1.2)}28%{transform:translate(-50%,-50%) scale(1)}42%{transform:translate(-50%,-50%) scale(1.14)}70%,100%{transform:translate(-50%,-50%) scale(1)}}
+.pc.mh::before,.pc.mx::before,.pc.mb::before{content:"";position:absolute;inset:0;background:#fff;opacity:0;z-index:-1;pointer-events:none}
+:root[data-pulse="bg"] .pc .wm{animation:none}
+:root[data-pulse="bg"] .pc.mh::before{animation:mhb 2.4s ease-in-out infinite}
+:root[data-pulse="bg"] .pc.mx::before,:root[data-pulse="bg"] .pc.mb::before{animation:mxb 1.3s ease-in-out infinite}
+@keyframes mhb{0%,100%{opacity:0}50%{opacity:.34}}
+@keyframes mxb{0%{opacity:0}14%{opacity:.42}28%{opacity:0}42%{opacity:.34}70%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.pc .wm,.pc::before{animation:none!important}}
 .pc .wm{position:absolute;left:50%;top:50%;height:88%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 20px/1 "PingFang SC","Noto Sans SC",serif;opacity:.2;z-index:-1;pointer-events:none}
 .xh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.xh h2{flex:1;min-width:0}
 .xm{display:flex;align-items:center;gap:8px;flex:none}
