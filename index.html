@@ -34,19 +34,11 @@ main{max-width:760px;margin:0 auto;padding:14px 14px 100px}
 .pc small{display:block;font:600 11px "PingFang SC","Noto Sans SC",sans-serif;opacity:.95}
 .pc.hid{background:rgba(148,163,184,.85)}
 .pc.mh,.pc.mx,.pc.mb{position:relative;overflow:hidden;isolation:isolate}
-/* 隐/显 pulse. Default = Option 1 (ring + word pulse). To switch to Option 2 (background pulse) set <html data-pulse="bg"> */
-.pc.mh .wm,.pc.mx .wm,.pc.mb .wm{will-change:transform}
-.pc.mh .wm{animation:mhp 2.4s ease-in-out infinite}
-.pc.mx .wm,.pc.mb .wm{animation:mxp 1.3s ease-in-out infinite}
-@keyframes mhp{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.16)}}
-@keyframes mxp{0%{transform:translate(-50%,-50%) scale(1)}14%{transform:translate(-50%,-50%) scale(1.2)}28%{transform:translate(-50%,-50%) scale(1)}42%{transform:translate(-50%,-50%) scale(1.14)}70%,100%{transform:translate(-50%,-50%) scale(1)}}
-.pc.mh::before,.pc.mx::before,.pc.mb::before{content:"";position:absolute;inset:0;background:#fff;opacity:0;z-index:-1;pointer-events:none}
-:root[data-pulse="bg"] .pc .wm{animation:none}
-:root[data-pulse="bg"] .pc.mh::before{animation:mhb 2.4s ease-in-out infinite}
-:root[data-pulse="bg"] .pc.mx::before,:root[data-pulse="bg"] .pc.mb::before{animation:mxb 1.3s ease-in-out infinite}
-@keyframes mhb{0%,100%{opacity:0}50%{opacity:.34}}
-@keyframes mxb{0%{opacity:0}14%{opacity:.42}28%{opacity:0}42%{opacity:.34}70%,100%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.pc .wm,.pc::before{animation:none!important}}
+/* 隐: slow pulse + diminish on word and ring (3.6s). 显: heartbeat on word and ring, random rhythm driven by the script at the end of the file. No background pulsing. */
+.pc.mh .wm{animation:mhd 3.6s ease-in-out infinite;will-change:transform}
+.pc.mx .wm,.pc.mb .wm{will-change:transform}
+@keyframes mhd{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.2}50%{transform:translate(-50%,-50%) scale(.84);opacity:.04}}
+@media (prefers-reduced-motion:reduce){.pc .wm{animation:none!important}}
 .pc .wm{position:absolute;left:50%;top:50%;height:88%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 20px/1 "PingFang SC","Noto Sans SC",serif;opacity:.2;z-index:-1;pointer-events:none}
 .xh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.xh h2{flex:1;min-width:0}
 .xm{display:flex;align-items:center;gap:8px;flex:none}
@@ -644,4 +636,25 @@ window.bazi=function(){v.innerHTML=baziHTML()};
 nav();R();
 function tick(){const d=new Date();document.getElementById('clk').textContent=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' ('+d.toLocaleDateString('zh-CN',{weekday:'short'})+') · '+d.toLocaleTimeString('en-GB')}
 tick();setInterval(tick,1000);
-</script></body></html>
+</script><script>
+/* 显 heartbeat: each beat is followed by a random rest, so the full cycle varies from about 1.3s to 2.2s */
+(function(){
+const rm=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(rm||!Element.prototype.animate)return;
+const T='translate(-50%,-50%) ';
+const KF=[{transform:T+'scale(1)',offset:0},{transform:T+'scale(1.2)',offset:.2},{transform:T+'scale(1)',offset:.4},{transform:T+'scale(1.14)',offset:.6},{transform:T+'scale(1)',offset:1}];
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function beat(el){
+  if(!el.isConnected)return;
+  el.animate(KF,{duration:700,easing:'ease-in-out'}).onfinish=()=>setTimeout(()=>beat(el),rnd(600,1500));
+}
+function scan(root){
+  (root.querySelectorAll?root.querySelectorAll('.pc.mx .wm,.pc.mb .wm'):[]).forEach(el=>{
+    if(el._hb)return;el._hb=1;setTimeout(()=>beat(el),rnd(0,1300));
+  });
+}
+scan(document);
+new MutationObserver(m=>m.forEach(r=>r.addedNodes.forEach(n=>n.nodeType===1&&scan(n)))).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body></html>
